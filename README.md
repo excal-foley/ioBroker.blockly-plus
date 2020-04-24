@@ -1,7 +1,7 @@
 # ![Logo](admin/blockly-plus.png) ioBroker - Blockly Plus
 Add future blocks to ioBroker JavaScript-Blockly
 
- [<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="" style="height:1.3em"/> Github page](https://github.com/excal-foley/ioBroker.blockly-plus)
+ [<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="" height="20"/> Github page](https://github.com/excal-foley/ioBroker.blockly-plus)
 
 ### Extract of blocks to be added
 
@@ -49,7 +49,7 @@ This is my first project on Github and i hope i can give and get help.
 
 #### Install with web-interface
 
-In adapter tab, click on the octocat-icon <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="" style="height:1.2em"/>. Choose register "Any", insert the link `https://github.com/excal-foley/ioBroker.blockly-plus` and install.
+In adapter tab, click on the octocat-icon <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="" height="18"/>. Choose register "Any", insert the link `https://github.com/excal-foley/ioBroker.blockly-plus` and install.
 
 #### Install with commands
 `npm install https://github.com/excal-foley/ioBroker.blockly-plus`
