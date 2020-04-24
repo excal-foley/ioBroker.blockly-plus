@@ -1,9 +1,13 @@
 .git
 .github
 .idea
-node_modules
-package-lock.json
 nbproject
 admin/i18n/flat.txt
 admin/i18n/*/flat.txt
+
+# create by 'npm install'
+node_modules
+package-lock.json
+
+# create by 'iobroker upload adapter'
 admin/_data.json
