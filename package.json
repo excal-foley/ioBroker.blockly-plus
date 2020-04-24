@@ -20,14 +20,7 @@
       "url": "https://github.com/excal-foley/ioBroker.blockly-plus/blob/master/LICENSE"
     }
   ],
-  "keywords": [
-    "ioBroker",
-    "blockly",
-    "javascript",
-    "js",
-    "scriptengine",
-    "blokly"
-  ],
+  "keywords": ["ioBroker", "blockly", "javascript", "js", "scriptengine", "blokly"],
   "repository": {
     "type": "git",
     "url": "https://github.com/excal-foley/ioBroker.blockly-plus"
@@ -38,7 +31,6 @@
     "mocha": "^4.1.0",
     "chai": "^4.1.2"
   },
-  "main": "main.js",
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha --exit"
   },
