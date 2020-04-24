@@ -1,5 +1,5 @@
-# Custom Blocks for ioBroker
-Add custom blocks to ioBroker-Blockly
+# ![Logo](admin/blockly-plus.png) ioBroker - Blockly Plus
+Add future blocks to ioBroker JavaScript-Blockly
 
 ### Extract of blocks to be added
 
@@ -69,6 +69,11 @@ I don't know how to create an automatic install package, therefore the repositor
    Remark: *I don't know how to confirm settings without restart system. Is there a short way to reload the tab.html/webserver???*
 
 5. To **restore** the original state execute "**./build.py -d**" (--delete) and then remove the folder
+
+## License
+[The MIT License (MIT)](https://github.com/excal-foley/ioBroker.blockly-plus/blob/master/LICENSE)
+
+Copyright (c) 2020 Excal Foley <excal.foley@gmail.com>
 
 ## Links
 [this project - Github page](https://github.com/excal-foley/iobroker-blockly-custom)

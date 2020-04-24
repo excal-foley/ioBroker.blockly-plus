@@ -2,20 +2,20 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <link rel="shortcut icon" href="sandbox/favicon.ico">
+  <link rel="shortcut icon" href="../admin/blockly-plus.png">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="google" value="notranslate">
   <title>ioBroker-blockly development</title>
-  <link rel="stylesheet" href="sandbox/style.css">
+  <link rel="stylesheet" href="style.css">
 
-  <script type="text/javascript" src="../../vendor/socket.io.js"></script>
+  <script type="text/javascript" src="../../iobroker.javascript/admin/vendor/socket.io.js"></script>
 
-  <script src="sandbox/storage.js"></script><!--save blocks local-->
-  <script src="../blockly_compressed.js"></script>
-  <script src="../blocks_compressed.js"></script>
-  <script src="../javascript_compressed.js"></script>
+  <script src="storage.js"></script><!--save blocks local-->
+  <script src="../../iobroker.javascript/admin/google-blockly/blockly_compressed.js"></script>
+  <script src="../../iobroker.javascript/admin/google-blockly/blocks_compressed.js"></script>
+  <script src="../../iobroker.javascript/admin/google-blockly/javascript_compressed.js"></script>
 
-  <script src="sandbox/code.js"></script>
+  <script src="code.js"></script>
 
   <script>
   // this block makes sandbox cmpatible with ioBroker blocks
@@ -34,22 +34,21 @@
   </script>
 
   <!-- start add ioBroker Blocks -->
-    <script type="text/javascript" src="../own/blocks_words.js"></script>
-    <script type="text/javascript" src="../own/field_oid.js"></script>
-    <script type="text/javascript" src="../own/field_cron.js"></script>
-    <script type="text/javascript" src="../own/field_script.js"></script>
-    <script type="text/javascript" src="../own/blocks_system.js"></script>
-    <script type="text/javascript" src="../own/blocks_action.js"></script>
-    <script type="text/javascript" src="../own/blocks_sendto.js"></script>
-    <script type="text/javascript" src="../own/blocks_time.js"></script>
-    <script type="text/javascript" src="../own/blocks_convert.js"></script>
-    <script type="text/javascript" src="../own/blocks_trigger.js"></script>
-    <script type="text/javascript" src="../own/blocks_procedures.js"></script>
-    <script type="text/javascript" src="../own/blocks_timeout.js"></script>
-    <script type="text/javascript" src="../../../telegram.admin/blockly.js"></script>
-  <!-- end add ioBroker Blocks -->
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/blocks_words.js"></script>
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/field_oid.js"></script>
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/field_cron.js"></script>
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/field_script.js"></script>
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/blocks_system.js"></script>
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/blocks_action.js"></script>
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/blocks_sendto.js"></script>
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/blocks_time.js"></script>
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/blocks_convert.js"></script>
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/blocks_trigger.js"></script>
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/blocks_procedures.js"></script>
+    <script type="text/javascript" src="../../iobroker.javascript/admin/google-blockly/own/blocks_timeout.js"></script>
+    <script type="text/javascript" src="../../iobroker.telegram/admin/blockly.js"></script>
 
-    <!--start custom blocks--><script type="text/javascript" src="../../google-blockly/custom/category.js"></script><script type="text/javascript" src="../../google-blockly/custom/original_fixes.js"></script><script type="text/javascript" src="../../google-blockly/custom/blocks/logic_ifEmpty.js"></script><script type="text/javascript" src="../../google-blockly/custom/blocks/telegram_keyboard.js"></script><script type="text/javascript" src="../../google-blockly/custom/blocks/multiplex.js"></script><script type="text/javascript" src="../../google-blockly/custom/blocks/loops.js"></script><script type="text/javascript" src="../../google-blockly/custom/blocks/math_rnd_multiple.js"></script><script type="text/javascript" src="../../google-blockly/custom/blocks/old_own_code.js"></script><script type="text/javascript" src="../../google-blockly/custom/blocks/logic_between.js"></script><script type="text/javascript" src="../../google-blockly/custom/blocks/custom.js"></script><script type="text/javascript" src="../../google-blockly/custom/blocks/msg/de_ioBroker_change.js"></script><!--end custom blocks-->
+  <!-- end add ioBroker Blocks -->
 
 </head>
 <body>
@@ -80,13 +79,13 @@
             </td>
             <td class="tabmax">
               <button id="trashButton" class="notext" title="...">
-                <img src='../media/1x1.gif' class="trash icon21">
+                <img src='../../iobroker.javascript/admin/google-blockly/media/1x1.gif' class="trash icon21">
               </button>
               <button id="linkButton" class="notext" title="...">
-                <img src='../media/1x1.gif' class="link icon21">
+                <img src='../../iobroker.javascript/admin/google-blockly/media/1x1.gif' class="link icon21">
               </button>
               <button id="runButton" class="notext primary" title="...">
-                <img src='../media/1x1.gif' class="run icon21">
+                <img src='../../iobroker.javascript/admin/google-blockly/media/1x1.gif' class="run icon21">
               </button>
             </td>
           </tr>
@@ -415,19 +414,7 @@
     <category name="%{BKY_CATVARIABLES}" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
     <category name="%{BKY_CATFUNCTIONS}" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
   </xml>
-
-  <script type="text/javascript">
-      (function() {
-        let t = '';
-        for (let s = systemLang, n = 0; n < this.Blockly.CustomBlocks.length; n++) {
-          var a = this.Blockly.CustomBlocks[n];
-          for (var i in t += '<category name="' + this.Blockly.Words[a][s] + '" colour="' + this.Blockly[a].HUE + '">', this.Blockly[a].blocks) this.Blockly[a].blocks.hasOwnProperty(i) && (t += this.Blockly[a].blocks[i]);
-          t += "</category>"
-        }
-        let toobox = window.document.getElementById("toolbox");
-        toolbox.outerHTML = toolbox.outerHTML.replace("<category><block>%%CUSTOM_BLOCKS%%</block></category>", t);
-      })();
-  </script>
-
+  
+  <script type="text/javascript" src="../admin/blockly.js"></script>
 </body>
 </html>
