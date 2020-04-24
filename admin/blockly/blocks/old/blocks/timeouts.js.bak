@@ -1,0 +1,202 @@
+'use strict';
+goog.provide('Blockly.JavaScript.Timeouts');
+goog.require('Blockly.JavaScript');
+
+BOB_.Timeouts = BOB_.Timeouts || {};
+
+/**///###########################    Funktion - findLegalName    ###########################//
+/**
+ * Ensure two identically-named procedures don't exist.
+ * @param {string} name Proposed procedure name.
+ * @param {!Blockly.Block} block Block to disambiguate.
+ * @return {string} Non-colliding name.
+ */
+BOB_.findLegalName = function(name, block) {
+    if (block.isInFlyout) {
+        // Flyouts can have multiple procedures called 'do something'.
+        return name;
+    }
+    while (!BOB_.isLegalName_(name, block.workspace, block)) {
+        // Collision with another procedure.
+        var r = name.match(/^(.*?)(\d+)$/);
+        if (!r) {
+            name += '2';
+        } else {
+            name = r[1] + (parseInt(r[2], 10) + 1);
+        }
+    }
+    return name;
+};
+
+/**///###########################    Funktion - isLegalName    ###########################//
+/**
+ * Does this procedure have a legal name?  Illegal names include names of
+ * procedures already defined.
+ * @param {string} name The questionable name.
+ * @param {!Blockly.Workspace} workspace The workspace to scan for collisions.
+ * @param {Blockly.Block=} opt_exclude Optional block to exclude from
+ *     comparisons (one doesn't want to collide with oneself).
+ * @return {boolean} True if the name is legal.
+ * @private
+ */
+BOB_.isLegalName_ = function(name, workspace, opt_exclude) {
+    var blocks = workspace.getAllBlocks();
+    // Iterate through every block and check the name.
+    for (var i = 0; i < blocks.length; i++) {
+        if (blocks[i] == opt_exclude) {
+            continue;
+        }
+        if (blocks[i].isTimeout_ || blocks[i].isInterval_) {
+            var blockName = blocks[i].getFieldValue('NAME');
+            if (Blockly.Names.equals(blockName, name)) {
+                return false;
+            }
+        }
+    }
+    return true;
+};
+
+/**///###########################    Funktion - rename    ###########################//
+/**
+ * Rename a procedure.  Called by the editable field.
+ * @param {string} name The proposed new name.
+ * @return {string} The accepted name.
+ * @this {!Blockly.Field}
+ */
+BOB_.rename = function (name) {
+    // Strip leading and trailing whitespace.  Beyond this, all names are legal.
+    name = name.replace(/^[\s\xa0]+|[\s\xa0]+$/g, '');
+    return BOB_.findLegalName(name, this.sourceBlock_);
+};
+
+/**///###########################    Funktion - getAllVar    ###########################//
+BOB_.getAllVar = function (workspace, isType) {
+    var blocks = workspace.getAllBlocks();
+    var result = [];
+
+    // Iterate through every block and check the name.
+    for (var i = 0; i < blocks.length; i++) {
+        if (blocks[i][isType]) {
+            result.push([blocks[i].getFieldValue('NAME'), blocks[i].getFieldValue('NAME')]);
+        }
+    }
+    !result.length && result.push(['', '']);
+
+    return result;
+};
+
+/**///###########################    Funktion - setTimeoutsBlock    ###########################//
+BOB_.setTimeoutsBlock = function(type, Type) {
+  /**///###########################    set    ###########################//
+  let BlockName_set = 'timeouts_set'+type;
+  /**//***************************    Block - Timeouts_set    ***************************///
+  Blockly.Blocks[BlockName_set] = {
+      init: function() {
+          //Variablen-Feld
+          var nameField = new Blockly.FieldTextInput(
+              BOB_.findLegalName(type, this),
+              BOB_.rename);
+          nameField.setSpellcheck(false);
+
+          this.appendValueInput('DELAY')
+              .appendField(Blockly.Words[BlockName_set][systemLang])
+              .appendField(nameField, 'NAME')
+              .appendField(Blockly.Words[BlockName_set+'_in'][systemLang])
+              .setCheck('Number')
+              .appendShadowBlock('math_number',{NUM: 1});
+          this.appendDummyInput()
+              .appendField(new Blockly.FieldDropdown([
+                  [Blockly.Msg['time_ms'], 'ms'],
+                  [Blockly.Msg['time_sec'], 'sec'],
+                  [Blockly.Msg['time_min'], 'min']
+              ]).setDefault('sec'), 'UNIT')
+              .appendField('  Reset')
+              .appendField(new Blockly.FieldCheckbox('TRUE'), 'RESET')
+          this.appendStatementInput('STATEMENT')
+              .setCheck(null);
+
+          this.setPreviousStatement(true, null);
+          this.setNextStatement(true, null);
+          this.setInputsInline(true);
+          this.setColour(this.getMsgCat('HUE'));
+          this.setTooltip(Blockly.Words[BlockName_set+'_tooltip'][systemLang]);
+          this.setHelpUrl(Blockly.Words[BlockName_set+'_help']);
+          this.initSvg();
+      },
+      isTimeout_:  (type === 'timeout'),
+      isInterval_: (type === 'interval'),
+      getVars: function () {
+          return [this.getFieldValue('NAME')];
+      },
+      getVarModels: function () {
+          var name = this.getFieldValue('NAME');
+          return [{getId: function () {return name}, name: name}];
+      }
+  }
+
+  /**//***************************    JavaScript - Timeouts_set    ***************************///
+  Blockly.JavaScript[BlockName_set] = function(block) {
+      var statements = Blockly.JavaScript.statementToCode(block, 'STATEMENT');
+      var delay = Blockly.JavaScript.valueToCode(block, 'DELAY', Blockly.JavaScript.ORDER_MULTIPLICATION);
+      var reset = block.getFieldValue('RESET');
+      var name  = BOB_.getVarName(block,'NAME');
+      var unit  = block.getFieldValue('UNIT');
+      if (unit === 'min') {
+          var factor = ' * 60000';
+      } else if (unit === 'sec') {
+          var factor = ' * 1000';
+      } else {
+          var factor = '';
+      }
+
+      if (type === 'timeout') {
+        var clear = '(function () {if (' + name + ') {clearTimeout(' + name + '); ' + name + ' = null;}})();\n'
+        var set = name + ' = setTimeout(function () {\n' + statements + '}, ' + delay + factor + ');\n';
+
+      } else
+      if (type === 'interval') {
+        var clear = '(function () {if (' + name + ') {clearInterval(' + name + '); ' + name + ' = null;}})();\n';
+        var set = name + ' = setInterval(function () {\n' + statements + '}, ' + delay + factor + ');\n';
+      }
+      return (reset === 'TRUE' ? clear : '') + set;
+  }
+
+  /**///###########################    clear    ###########################//
+  let BlockName_clear = 'timeouts_clear'+type;
+  /**//***************************    Block - timeouts_cleartimeout    ***************************///
+  Blockly.Blocks[BlockName_clear] = {
+      init: function() {
+          this.appendDummyInput('NAME')
+              .appendField(Blockly.Words[BlockName_clear][systemLang])
+              .appendField(new Blockly.FieldDropdown(function () {
+                  return Blockly.getMainWorkspace() ? BOB_.getAllVar(Blockly.getMainWorkspace(), 'is'+Type+'_') : [];
+              }), 'NAME');
+
+          this.setPreviousStatement(true, null);
+          this.setNextStatement(true, null);
+          this.setInputsInline(true);
+          this.setColour(this.getMsgCat('HUE'));
+          this.setTooltip(Blockly.Words[BlockName_clear+'_tooltip'][systemLang]);
+          this.setHelpUrl(Blockly.Words[BlockName_clear+'_help']);
+          this.initSvg();
+      }
+  };
+
+  /**//***************************    JavaScript - timeouts_cleartimeout    ***************************///
+  Blockly.JavaScript[BlockName_clear] = function(block) {
+      var name = block.getFieldValue('NAME');
+        return '(function () {if (' + name + ') {clear' + Type + '(' + name + '); ' + name + ' = null;}})();\n';
+  };
+
+
+}
+
+/**///###########################    timeouts_timeout    ###########################//
+BOB_.setTimeoutsBlock('timeout','Timeout');
+BOB_.registerBlock('timeouts_cleartimeout');
+BOB_.registerBlock('timeouts_settimeout');
+
+/**///###########################    timeouts_interval    ###########################//
+BOB_.setTimeoutsBlock('interval','Interval');
+BOB_.registerBlock('timeouts_clearinterval');
+BOB_.registerBlock('timeouts_setinterval');

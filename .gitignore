@@ -7,5 +7,3 @@ nbproject
 admin/i18n/flat.txt
 admin/i18n/*/flat.txt
 admin/_data.json
-admin/blockly/blocks/old_own_code.js
-admin/blockly/blocks/old/*
