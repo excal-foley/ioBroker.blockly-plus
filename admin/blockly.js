@@ -11,7 +11,7 @@
     !Array.isArray(srcList) && (srcList = [srcList]);
     srcList.forEach(function(src) {
       var script = document.createElement('script');
-      script.async = true; // Force synchronous loading, to load them in the correct sequence
+      script.async = false; // Force synchronous loading, to load them in the correct sequence
       script.src = addPath + src;
       document.head.appendChild(script);
     });
