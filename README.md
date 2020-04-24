@@ -1,6 +1,8 @@
 # ![Logo](admin/blockly-plus.png) ioBroker - Blockly Plus
 Add future blocks to ioBroker JavaScript-Blockly
 
+ [<img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="" style="height:1.3em"/> Github page](https://github.com/excal-foley/ioBroker.blockly-plus)
+
 ### Extract of blocks to be added
 
 **> Multiple arithmetic- and logic-blocks <**<br/>
@@ -29,7 +31,6 @@ Add future blocks to ioBroker JavaScript-Blockly
 
 ...and much more
 
-<br/>
 
 ### Note / Disclaimer
 
@@ -37,46 +38,27 @@ This project is in an early alpha phase.
 
 The blocks could still contain bugs or be modified so that they are not downward compatible. For this reason they should'nt be transferred to a live/productive system.
 
-You can view and test the blocks in sandbox.html, if the reposetory is copied to javascript.admin/google-blockly/custom
+You can view and test the blocks in sandbox.html, if the reposetory is copied to iobroker.
 
 Currently the project is only translated into English and German.
 
 This is my first project on Github and i hope i can give and get help.
 
-### Requirement
 
-You need an ioBroker instance, with an install javascript-blockly adapter.
+### Manual
 
-The Telgram adapter is optional.
+#### Install with web-interface
 
+In adapter tab, click on the octocat-icon <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="" style="height:1.2em"/>. Choose register "Any", insert the link `https://github.com/excal-foley/ioBroker.blockly-plus` and install.
 
-### Instructions for use
+#### Install with commands
+`npm install https://github.com/excal-foley/ioBroker.blockly-plus`
 
-I don't know how to create an automatic install package, therefore the repository must be copied and executed manually.
-
-1. This reposetory must **copy to javascript.admin/google-blockly/custom**
-
-   *default: /opt/iobroker/iobroker-data/files/javascript.admin/google-blockly/custom*
-
-2. You can view and test the blocks in **sandbox.html**
-
-3. Execute **./build.py**
-
-   *This take all js-file-path from './', './blocks' and './blocks/msg' and links it to javascript.admin/tab.html and Sandbox*
-
-4. **Restart system** to confirm settings
-
-   Remark: *I don't know how to confirm settings without restart system. Is there a short way to reload the tab.html/webserver???*
-
-5. To **restore** the original state execute "**./build.py -d**" (--delete) and then remove the folder
-
-## License
-[The MIT License (MIT)](https://github.com/excal-foley/ioBroker.blockly-plus/blob/master/LICENSE)
-
-Copyright (c) 2020 Excal Foley <excal.foley@gmail.com>
+You can view and test the blocks in **sandbox.html**
 
 ## Links
-[this project - Github page](https://github.com/excal-foley/iobroker-blockly-custom)
+
+[this project - Github page](https://github.com/excal-foley/ioBroker.blockly-plus)
 
 [ioBroker - Github page](https://github.com/ioBroker/ioBroker)
 
@@ -87,3 +69,17 @@ Copyright (c) 2020 Excal Foley <excal.foley@gmail.com>
 [Google-Blockly - Github page](https://github.com/google/blockly)
 
 [Google-Blockly - project page](https://developers.google.com/blockly/)
+
+#### adapter was create with
+
+- [haus-automatisierung.com - ioBroker Modulentwicklung](https://youtu.be/fUMtyYOtRcQ)
+
+- [Adapter Development Documentation](https://github.com/ioBroker/ioBroker/wiki/Adapter-Development-Documentation)
+
+- [ioBroker.template](https://github.com/ioBroker/ioBroker.template)
+
+
+## License
+[The MIT License (MIT)](https://github.com/excal-foley/ioBroker.blockly-plus/blob/master/LICENSE)
+
+Copyright (c) 2020 Excal Foley <excal.foley@gmail.com>
