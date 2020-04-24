@@ -1,0 +1,10 @@
+.git
+.github
+.idea
+node_modules
+package-lock.json
+nbproject
+admin/i18n/flat.txt
+admin/i18n/*/flat.txt
+admin/blockly/blocks/old_own_code.js
+admin/blockly/blocks/old/*

@@ -1,0 +1,96 @@
+
+iobroker upload adapterName
+Upload web pages from "www" and "admin" folders in adapter into ioBroker file storage. Used normally by developers to see the changes done in the configuration pages or on "www" pages. You cannot change the files directly in "iobroker/iobroker-data/adapter/file". There is a flag for developers in config file (iobroker-data/iobroker.json) objects.noFileCache to disable cache of the file. With this flag set to true (of course new start required after configuration file changed) the changes in iobroker-data directory will be seen on the web without iobroker upload adapterName command.
+
+Note: you can call iobroker upload all to upload all adapters, e.g. after restore.
+
+
+
+iobroker-Upload-AdapterName
+Hochladen von Webseiten aus "www"- und "admin"-Ordnern im Adapter in den ioBroker-Dateispeicher. Wird normalerweise von Entwicklern verwendet, um die Änderungen zu sehen, die in den Konfigurationsseiten oder auf "www"-Seiten vorgenommen wurden. Sie können die Dateien nicht direkt in "iobroker/iobroker-data/adapter/file" ändern. Es gibt ein Flag für Entwickler in der Konfigurationsdatei (iobroker-data/iobroker.json) objects.noFileCache, um den Cache der Datei zu deaktivieren. Wenn dieses Flag auf true gesetzt ist (natürlich ist nach Änderung der Konfigurationsdatei ein Neustart erforderlich), werden die Änderungen im Verzeichnis iobroker-data ohne den Befehl iobroker upload adapterName im Web angezeigt.
+
+Hinweis: Sie können iobroker upload all aufrufen, um alle Adapter hochzuladen, z.B. nach der Wiederherstellung.
+
+
+inputs: [
+  {
+    type: "input_value",
+    name: "INPUT",
+    fields: [
+      { type: "field_label_serializable",
+        name: "NAME",
+        text: ""  },
+      { "type": "field_label_serializable",
+        "name": "NAME2",
+        "text": ""  }
+    ]
+  },
+  {
+    type: "input_dummy",
+    name: "DUMMY",
+    fields: [
+      { type: "field_dropdown",
+        name: "SELECTOR",
+        options: [ ["A", "OPTION1"], ["B", "OPTION2"], ["option", "OPTION3"] ]  }
+    ]
+  }
+]
+
+
+// JS
+Blockly.Blocks['block_type'] = {
+  init: function() {
+    this.appendValueInput("INPUT")
+        .setCheck(null)
+        .appendField(new Blockly.FieldLabelSerializable(""), "NAME")
+        .appendField(new Blockly.FieldLabelSerializable(""), "NAME2");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldDropdown([["option","OPTION1"], ["option","OPTION2"], ["option","OPTION3"]]), "SELECTOR");
+    this.setColour(230);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+// JSON
+{
+  "type": "block_type",
+  "message0": "%1 %2 %3 %4",
+  "args0": [
+    {
+      "type": "field_label_serializable",
+      "name": "NAME",
+      "text": ""
+    },
+    {
+      "type": "field_label_serializable",
+      "name": "NAME2",
+      "text": ""
+    },
+    {
+      "type": "input_value",
+      "name": "INPUT"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "SELECTOR",
+      "options": [
+        [
+          "option",
+          "OPTION1"
+        ],
+        [
+          "option",
+          "OPTION2"
+        ],
+        [
+          "option",
+          "OPTION3"
+        ]
+      ]
+    }
+  ],
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+}

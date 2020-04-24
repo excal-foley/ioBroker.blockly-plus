@@ -1,0 +1,53 @@
+{
+    "common": {
+        "name": "blockly-plus",
+        "version": "0.0.1",
+        "news": {
+            "0.0.1": {
+                "en": "initial adapter",
+                "de": "Initiale Version"
+            }
+        },
+		    "title": "Blockly Plus",
+        "titleLang": {
+            "en": "Blockly Plus",
+            "de": "Blockly Plus"
+        },
+        "desc": {
+            "en": "ioBroker extended-blocks Adapter",
+            "de": "ioBroker Extended-blocks Adapter"
+        },
+        "authors": [
+            "Excal Foley <excal.foley@gmail.com>"
+        ],
+        "keywords": ["ioBroker", "blockly", "javascript", "js", "scriptengine", "blokly"],
+        "platform": "Javascript/Node.js",
+        "mode": "once",
+        "icon": "blockly-plus.png",
+        "extIcon": "https://raw.githubusercontent.com/excal-foley/ioBroker.blockly-plus/master/admin/blockly-plus.png",
+        "readme": "https://github.com/excal-foley/ioBroker.blockly-plus/blob/master/README.md",
+        "localLink": "%web_protocol%://%ip%:8081/adapter/javascript/tab.html",
+        "loglevel": "info",
+        "blockly": true,
+        "compact": true,
+        "enabled": true,
+        "noConfig": false,
+        "type": "logic",
+        "materialize": true,
+        "materializeTab": true,
+        "dependencies": [
+            {
+                "js-controller": ">=1.4.2"
+            }
+        ],
+        "restartAdapters": ["javascript"]
+    },
+    "native": {
+        "test1": true,
+        "test2": 42,
+        "mySelect": "auto"
+    },
+    "objects": [
+
+    ]
+}
