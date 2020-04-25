@@ -15,6 +15,9 @@
  */
 var Code = {};
 
+// main path from data
+Code.mainPath = '../../javascript/';
+
 /**
  * Lookup for names of supported languages.  Keys should be in ISO 639 format.
  */
@@ -393,7 +396,7 @@ Code.init = function() {
            length: 3,
            colour: '#ccc',
            snap: true},
-       media: '../../iobroker.javascript/admin/google-blockly/media/',
+       media: Code.mainPath + 'google-blockly/media/',
        rtl: rtl,
        toolbox: toolboxXml,
        zoom:
@@ -539,10 +542,10 @@ Code.discard = function() {
 };
 
 // Load default language strings.
-document.write('<script src="../../iobroker.javascript/admin/google-blockly/msg/messages.js"></script>\n');
+document.write(`<script src="${Code.mainPath}google-blockly/msg/messages.js"></script>\n`);
 // Load the Code demo's language strings.
-document.write('<script src="../../iobroker.javascript/admin/google-blockly/own/msg/' + Code.LANG + '.js"></script>\n');
+document.write(`<script src="${Code.mainPath}google-blockly/own/msg/${Code.LANG}.js"></script>\n`);
 // Load Blockly's language strings.
-document.write('<script src="../../iobroker.javascript/admin/google-blockly/msg/js/' + Code.LANG + '.js"></script>\n');
+document.write(`<script src="${Code.mainPath}google-blockly/msg/js/${Code.LANG}.js"></script>\n`);
 
 window.addEventListener('load', Code.init);

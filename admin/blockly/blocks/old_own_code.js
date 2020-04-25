@@ -7,8 +7,8 @@ if ( Blockly.ownBlocks == null ) {
   BOB_.cat = {};
   BOB_.Operator = {};
   BOB_.OP = BOB_.Operator;
-  BOB_.local = /^file.*/.test(window.location.protocol);
-  BOB_.mainPath = BOB_.local ? '../admin/blockly/blocks/old/'
+  BOB_.local = /sandbox.html/.test(window.location.pathname);
+  BOB_.mainPath = BOB_.local ? '../blockly/blocks/old/'
                              : '../blockly-plus/blockly/blocks/old/';
   !Blockly.utils.xml && ( Blockly.utils.xml = Blockly.Xml.utils );
 }
