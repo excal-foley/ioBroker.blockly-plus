@@ -1,5 +1,3 @@
-.git
-.github
 .idea
 nbproject
 admin/i18n/flat.txt
@@ -8,6 +6,9 @@ admin/i18n/*/flat.txt
 # create by 'npm install'
 node_modules
 package-lock.json
+
+# crate by 'iobroker url'
+iob_npm.done
 
 # create by 'iobroker upload adapter'
 admin/_data.json
