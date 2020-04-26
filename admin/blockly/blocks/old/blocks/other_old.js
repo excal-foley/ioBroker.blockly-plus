@@ -35,28 +35,6 @@ Blockly.JavaScript['system_getObjProperties'] = function(block) {
   var code = 'getObject(' + object + ').' + prop;
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 }
-/**///###########################    system_getObject    ###########################//
-BOB_.registerBlock('system_getObject');
-Blockly.Blocks['system_getObject'] = {
-  init: function() {
-    this.appendValueInput('OBJECT')
-        .setCheck('String')
-        .appendField('getObject')
-        .appendShadowBlock('field_oid');
-
-    this.setOutput(true, ['Array', 'Object']);
-    this.setInputsInline(true);
-    this.setColour(this.getMsgCat('HUE'));
-    this.setTooltip('');
-    this.setHelpUrl('');
-    this.initSvg();
-  }
-}
-
-Blockly.JavaScript['system_getObject'] = function(block) {
-  var object = Blockly.JavaScript.valueToCode(block, 'OBJECT', Blockly.JavaScript.ORDER_ATOMIC);
-  return ['getObject(' + object + ')', Blockly.JavaScript.ORDER_FUNCTION_CALL];
-}
 
 /**///###########################    system_getStateValue    ###########################//
 BOB_.registerBlock('system_getStateValue');
