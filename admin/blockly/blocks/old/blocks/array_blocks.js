@@ -203,7 +203,7 @@ BOB_.setArrayBlock({
             ]
 });
 
-/**///###########################    system_prop    ###########################//
+/** ///###########################    system_prop    ###########################//
 BOB_.setArrayBlock({
   name: 'system_prop2',
   replaceBracket: true,
@@ -237,8 +237,8 @@ BOB_.setArrayBlock({
 //            '      </shadow>',
 //            '    </value>',
             '  </block>'
-          ] /**/
-});
+          ]
+}); /**/
 
 /** ///###########################    field_oids    ###########################//
 BOB_.setArrayBlock({
