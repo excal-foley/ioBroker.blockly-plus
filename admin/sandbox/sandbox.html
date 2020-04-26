@@ -30,7 +30,17 @@
           get blocklyWorkspace() { return Blockly.getMainWorkspace() }
       };
 
-      window.main = {}; // window.main.objects
+      window.main = {
+        objects: null,
+        showScriptDialog: (value, args, isReturn, callback) => {
+          this.scriptDialog = {};
+          this.scriptDialog.callback = callback,
+          this.scriptDialog.initValue = value,
+          this.scriptDialog.args = args,
+          this.scriptDialog.isReturn = isReturn || !1//,
+          //this.setState({showScript: !0})
+        }
+      };
   </script>
 
   <!-- start add ioBroker Blocks -->
