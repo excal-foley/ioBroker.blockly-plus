@@ -53,8 +53,8 @@ Blockly.Blocks['math_rnd_multiple'] = {
     this.setInputsInline(true);
     this.setOutput(true, 'Number');
     this.setColour(Blockly.Constants.Math.HUE);
-    this.setTooltip(Blockly.Words['math_rnd_multiple_Tooltip']);
-    this.setHelpUrl(Blockly.Words['math_rnd_multiple_HelpUrl']);
+    this.setTooltip(Blockly.Words['math_rnd_multiple_Tooltip'][systemLang]);
+    this.setHelpUrl(Blockly.Words['math_rnd_multiple_HelpUrl'][systemLang]);
     this.initSvg();
   },
 
