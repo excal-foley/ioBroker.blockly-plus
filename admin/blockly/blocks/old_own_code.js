@@ -205,9 +205,8 @@ BOB_.importScripts([
 
   'blocks/array_blocks.js',
 //  'blocks/timeouts.js',
-  'blocks/other_old.js',
+  'blocks/other_old.js'
 //  'blocks/loops.js',
-  'blocks/regex.js'
 ], BOB_.mainPath);
 
 
