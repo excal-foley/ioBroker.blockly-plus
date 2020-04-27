@@ -5,7 +5,7 @@
 'use strict';
 {
   let isSandbox = /sandbox.html/.test(window.location.pathname);
-  let mainPath = isSandbox ? '../blockly/' : '../blockly-plus/blockly/';
+  let mainPath = isSandbox ? '../' : '../blockly-plus/';
   let importScripts = function( srcList, addPath='' ) {
     !Array.isArray(srcList) && (srcList = [srcList]);
     srcList.forEach(function(src) {
@@ -16,13 +16,36 @@
     });
   }
 
+  let importList = {};
+
+  importList.blockly = [
+    'category.js',
+    'original_fixes.js'
+  ];
+
   // DO NOT EDIT THIS LINE!!! This generate from python-script
-  let importList = ['category.js', 'original_fixes.js', 'blocks/logic_ifEmpty.js', 'blocks/telegram_keyboard.js', 'blocks/multiplex.js', 'blocks/loops.js', 'blocks/math_rnd_multiple.js', 'blocks/logic_between.js', 'blocks/custom.js', 'blocks/msg/de_ioBroker_change.js'];
+  importList.blocks = [
+    'logic_ifEmpty.js',
+    'telegram_keyboard.js',
+    'multiplex.js',
+    'loops.js',
+    'math_rnd_multiple.js',
+    'logic_between.js',
+    'system.js',
+    'regex.js',
+    'custom.js',
+    'msg/de_ioBroker_change.js'
+  ];
   // DO NOT EDIT THIS LINE!!! ################################
 
-  importList.push('blocks/old_own_code.js');
+  importList.blocks.push('old_own_code.js');
 
-  importScripts(importList, mainPath);
+  importScripts(importList.blockly, mainPath + 'blockly/');
+  importScripts(importList.blocks, mainPath + 'blockly/blocks/');
 
   if (isSandbox) importScripts('makeToolbox.js');
+
+  Blockly.Constants.BlocklyPlus = {
+    get getFieldImage() { return new Blockly.FieldImage(mainPath + 'blockly-plus.png', 15, 15, '➕') }
+  };
 }
