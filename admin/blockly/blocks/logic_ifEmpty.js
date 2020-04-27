@@ -26,7 +26,7 @@ Blockly.Blocks['logic_ifEmpty'] = {
     this.setColour(Blockly.Constants.Logic.HUE);
     this.setTooltip(Blockly.Words['logic_ifEmpty_Tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['logic_ifEmpty_HelpUrl'][systemLang]);
-    this.initSvg();
+    Blockly.BlocklyPlus.Marker(this);
   },
 
   onchange: function(event) {

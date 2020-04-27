@@ -556,7 +556,7 @@ Blockly.Blocks['math_set_operators'] = {
     this.setColour(Blockly.Constants.Variables.HUE);
     this.setTooltip('');
     this.setHelpUrl('');
-    this.initSvg();
+    Blockly.BlocklyPlus.Marker(this);
   }
 }
 

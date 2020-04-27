@@ -135,7 +135,7 @@ Blockly.Blocks['sendto_telegram_setKeyboard'] = {
         this.setColour(Blockly.Sendto.HUE);
         this.setTooltip(Blockly.Words['telegram_setKeyboard_tooltip'][systemLang]);
         this.setHelpUrl(Blockly.Words['telegram_setKeyboard_help'][systemLang]);
-        this.initSvg();
+        Blockly.BlocklyPlus.Marker(this);
     }
 };
 

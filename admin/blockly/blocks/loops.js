@@ -68,7 +68,7 @@ Blockly.Blocks['loops_getIndex'] = {
         this.setColour(Blockly.Constants.Loops.HUE);
         this.setTooltip(Blockly.Words['on_source_tooltip'][systemLang]);
         this.setHelpUrl('');
-        this.initSvg();
+        Blockly.BlocklyPlus.Marker(this);
     },
     /**
      * Called whenever anything on the workspace changes.
@@ -139,7 +139,7 @@ Blockly.Blocks['loops_getIndexVar'] = {
         this.setColour(Blockly.Constants.Loops.HUE);
         this.setTooltip(Blockly.Words['on_source_tooltip'][systemLang]);
         this.setHelpUrl('');
-        this.initSvg();
+        Blockly.BlocklyPlus.Marker(this);
     },
 
     onchange: Blockly.Blocks['loops_getIndex'].onchange,

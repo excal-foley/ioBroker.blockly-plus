@@ -55,7 +55,7 @@ Blockly.Blocks['math_rnd_multiple'] = {
     this.setColour(Blockly.Constants.Math.HUE);
     this.setTooltip(Blockly.Words['math_rnd_multiple_Tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['math_rnd_multiple_HelpUrl'][systemLang]);
-    this.initSvg();
+    Blockly.BlocklyPlus.Marker(this);
   },
 
   /**

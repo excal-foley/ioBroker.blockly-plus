@@ -47,7 +47,7 @@ Blockly.Blocks['logic_between'] = {
     this.setColour(Blockly.Constants.Logic.HUE);
     this.setTooltip('');
     this.setHelpUrl('');
-    this.initSvg();
+    Blockly.BlocklyPlus.Marker(this);
   }
 }
 /**//***************************    Javascript    ***************************///

@@ -13,7 +13,7 @@ if (!Blockly.CustomBlocks.includes('Regex')) {
   Blockly.CustomBlocks.push('Regex');
 
   Blockly.Regex = {
-    HUE: '#7eceb3',
+    HUE: '#389475',
     blocks: {}
   };
 }
@@ -34,7 +34,6 @@ Blockly.Regex.blocks['BLOCKLY-PLUS_regex_fix'] =
 Blockly.Blocks['BLOCKLY-PLUS_regex_fix'] = {
   init: function() {
     this.appendDummyInput()
-        .appendField(Blockly.Constants.BlocklyPlus.Marker) // Marked as Blockly-Plus block
         .appendField('/');
     this.appendDummyInput('PATTERN')
         .appendField(new Blockly.FieldTextInput(Blockly.Words['BLOCKLY-PLUS_regex_example_pattern']), 'PATTERN')
@@ -47,6 +46,7 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_fix'] = {
     this.setColour(Blockly.Regex.HUE);
     this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_fix_tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_fix_helpurl'][systemLang]);
+    Blockly.BlocklyPlus.Marker(this);
   }
 };
 
@@ -92,6 +92,7 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_str'] = {
     this.setColour(Blockly.Regex.HUE);
     this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_str_tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_str_helpurl'][systemLang]);
+    Blockly.BlocklyPlus.Marker(this);
   }
 };
 
@@ -139,6 +140,7 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_test'] = {
     this.setColour(Blockly.Regex.HUE);
     this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_test_tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_test_tooltip'][systemLang]);
+    Blockly.BlocklyPlus.Marker(this);
   }
 };
 
@@ -196,7 +198,7 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_match'] = {
     this.setColour(Blockly.Regex.HUE);
     this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_match_tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_match_helpurl'][systemLang]);
-    this.updateShape_();
+    Blockly.BlocklyPlus.Marker(this);
   },
 
   option_: 'FIRST',
@@ -351,6 +353,7 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_replace'] = {
     this.setColour(Blockly.Regex.HUE);
     this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_replace_tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_replace_helpurl'][systemLang]);
+    Blockly.BlocklyPlus.Marker(this);
   }
 };
 

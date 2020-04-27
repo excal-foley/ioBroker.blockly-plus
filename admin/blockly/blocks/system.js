@@ -26,6 +26,7 @@ Blockly.Blocks['BLOCKLY-PLUS_getObject'] = {
     this.setColour(Blockly.System.HUE);
     this.setTooltip(Blockly.Words['BLOCKLY-PLUS_getObject_Tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_getObject_HelpUrl'][systemLang]);
+    Blockly.BlocklyPlus.Marker(this);
   }
 }
 
