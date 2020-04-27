@@ -1,53 +1,70 @@
 'use strict';
 
-//Blockly.Constants.Regex = Blockly.Constants.Regex || {};
+goog.provide('Blockly.JavaScript.Regex');
 
+goog.require('Blockly.JavaScript');
+
+// --- Category Regex --------------------------------------------------
+Blockly.Words['Regex']                                = {'en': 'Pattern',                  'de': 'Muster'};
+
+Blockly.CustomBlocks = Blockly.CustomBlocks || [];
+
+if (!Blockly.CustomBlocks.includes('Regex')) {
+  Blockly.CustomBlocks.push('Regex');
+
+  Blockly.Regex = {
+    HUE: '#3fa684',
+    blocks: {}
+  };
+}
+
+// --- Words Example --------------------------------------------------
 Blockly.Words['BLOCKLY-PLUS_regex_example_text']          = {'en': 'This (bracketed) text is found',  'de': 'Der (eingeklammerte) Text wird gefunden'  };
-Blockly.Words['BLOCKLY-PLUS_regex_example_muster']        = '\\([^\\(\\)]*\\)';
+Blockly.Words['BLOCKLY-PLUS_regex_example_pattern']        = '\\([^\\(\\)]*\\)';
 Blockly.Words['BLOCKLY-PLUS_regex_example_replace']       = {'en': 'excluded',  'de': 'ausgeklammerte'  };
 
+// --- regex_fix --------------------------------------------------
+Blockly.Words['BLOCKLY-PLUS_regex_fix_tooltip']            = {'en': '',              'de': ''            };
+Blockly.Words['BLOCKLY-PLUS_regex_fix_helpurl']            = {'en': '',              'de': ''            };
 
-// --- regex_Fix --------------------------------------------------
-Blockly.Words['BLOCKLY-PLUS_regex_Fix_tooltip']            = {'en': '',              'de': ''            };
-Blockly.Words['BLOCKLY-PLUS_regex_Fix_helpurl']            = {'en': '',              'de': ''            };
-
-Blockly.Test.blocks['BLOCKLY-PLUS_regex_Fix'] =
-    '  <block type="BLOCKLY-PLUS_regex_Fix">'
+Blockly.Regex.blocks['BLOCKLY-PLUS_regex_fix'] =
+    '  <block type="BLOCKLY-PLUS_regex_fix">'
     +'  </block>';
 
-Blockly.Blocks['BLOCKLY-PLUS_regex_Fix'] = {
+Blockly.Blocks['BLOCKLY-PLUS_regex_fix'] = {
   init: function() {
     this.appendDummyInput()
+        .appendField(Blockly.Constants.BlocklyPlus.Marker) // Marked as Blockly-Plus block
         .appendField('/');
-    this.appendDummyInput('MUSTER')
-        .appendField(new Blockly.FieldTextInput(Blockly.Words['BLOCKLY-PLUS_regex_example_muster']), 'MUSTER')
+    this.appendDummyInput('PATTERN')
+        .appendField(new Blockly.FieldTextInput(Blockly.Words['BLOCKLY-PLUS_regex_example_pattern']), 'PATTERN')
         .appendField('/');
     this.appendDummyInput('FLAG')
         .appendField(new Blockly.FieldTextInput('ig'), 'FLAG');
 
     this.setInputsInline(true);
     this.setOutput(true, 'Regex');
-    this.setColour(Blockly.Constants.Text.HUE);
-    this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_Fix_tooltip'][systemLang]);
-    this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_Fix_helpurl'][systemLang]);
+    this.setColour(Blockly.Regex.HUE);
+    this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_fix_tooltip'][systemLang]);
+    this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_fix_helpurl'][systemLang]);
   }
 };
 
-Blockly.JavaScript['BLOCKLY-PLUS_regex_Fix'] = function(block) {
-  let muster = block.getFieldValue('MUSTER');
+Blockly.JavaScript['BLOCKLY-PLUS_regex_fix'] = function(block) {
+  let pattern = block.getFieldValue('PATTERN');
   let flag = block.getFieldValue('FLAG');
-  return [`/${muster}/${flag}`, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+  return [`/${pattern}/${flag}`, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 
-// --- regex_Str --------------------------------------------------
-Blockly.Words['BLOCKLY-PLUS_regex_Str_tooltip']            = {'en': '',              'de': ''            };
-Blockly.Words['BLOCKLY-PLUS_regex_Str_helpurl']            = {'en': '',              'de': ''            };
+// --- regex_str --------------------------------------------------
+Blockly.Words['BLOCKLY-PLUS_regex_str_tooltip']            = {'en': '',              'de': ''            };
+Blockly.Words['BLOCKLY-PLUS_regex_str_helpurl']            = {'en': '',              'de': ''            };
 
-Blockly.Test.blocks['BLOCKLY-PLUS_regex_Str'] =
-    '<block type="BLOCKLY-PLUS_regex_Str">'
-    +'  <value name="MUSTER">'
+Blockly.Regex.blocks['BLOCKLY-PLUS_regex_str'] =
+    '<block type="BLOCKLY-PLUS_regex_str">'
+    +'  <value name="PATTERN">'
     +'    <shadow type="text">'
-    +`      <field name="TEXT">${Blockly.Words['BLOCKLY-PLUS_regex_example_muster']}</field>`
+    +`      <field name="TEXT">${Blockly.Words['BLOCKLY-PLUS_regex_example_pattern']}</field>`
     +'    </shadow>'
     +'  </value>'
     +'  <value name="FLAG">'
@@ -57,13 +74,13 @@ Blockly.Test.blocks['BLOCKLY-PLUS_regex_Str'] =
     +'  </value>'
     +'</block>';
 
-Blockly.Blocks['BLOCKLY-PLUS_regex_Str'] = {
+Blockly.Blocks['BLOCKLY-PLUS_regex_str'] = {
   init: function() {
-    this.appendValueInput('MUSTER')
+    this.appendValueInput('PATTERN')
         .setCheck('String')
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField('/');
-        //.appendShadowBlock('text', {TEXT: Blockly.Words['BLOCKLY-PLUS_regex_example_muster']});
+        //.appendShadowBlock('text', {TEXT: Blockly.Words['BLOCKLY-PLUS_regex_example_pattern']});
     this.appendValueInput('FLAG')
         .setCheck('String')
         .setAlign(Blockly.ALIGN_RIGHT)
@@ -72,19 +89,18 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_Str'] = {
 
     this.setInputsInline(true);
     this.setOutput(true, 'Regex');
-    this.setColour(Blockly.Constants.Text.HUE);
-    this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_Str_tooltip'][systemLang]);
-    this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_Str_helpurl'][systemLang]);
+    this.setColour(Blockly.Regex.HUE);
+    this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_str_tooltip'][systemLang]);
+    this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_str_helpurl'][systemLang]);
   }
 };
 
-Blockly.JavaScript['BLOCKLY-PLUS_regex_Str'] = function(block) {
-  let muster = Blockly.JavaScript.valueToCode(block, 'MUSTER', Blockly.JavaScript.ORDER_COMMA);
+Blockly.JavaScript['BLOCKLY-PLUS_regex_str'] = function(block) {
+  let pattern = Blockly.JavaScript.valueToCode(block, 'PATTERN', Blockly.JavaScript.ORDER_COMMA);
   let flag = Blockly.JavaScript.valueToCode(block, 'FLAG', Blockly.JavaScript.ORDER_COMMA);
   flag = (flag == "''") ? '' : ', '+flag;
-  return [`new RegExp(${muster}${flag})`, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+  return [`new RegExp(${pattern}${flag})`, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
-
 
 // --- regex_test --------------------------------------------------
 Blockly.Words['BLOCKLY-PLUS_regex_test_match']              = {'en': 'Match',         'de': 'Entspricht'        };
@@ -92,16 +108,16 @@ Blockly.Words['BLOCKLY-PLUS_regex_test_pattern']            = {'en': 'with patte
 Blockly.Words['BLOCKLY-PLUS_regex_test_tooltip']            = {'en': '',              'de': ''                  };
 Blockly.Words['BLOCKLY-PLUS_regex_test_helpurl']            = {'en': '',              'de': ''                  };
 
-Blockly.Test.blocks['BLOCKLY-PLUS_regex_test'] =
+Blockly.Regex.blocks['BLOCKLY-PLUS_regex_test'] =
     '<block type="BLOCKLY-PLUS_regex_test">'
     +'  <value name="TEXT">'
     +'    <block type="text">'
     +`      <field name="TEXT">${Blockly.Words['BLOCKLY-PLUS_regex_example_text'][systemLang]}</field>`
     +'    </block>'
     +'  </value>'
-    +'  <value name="MUSTER">'
-    +'    <shadow type="BLOCKLY-PLUS_regex_Fix">'
-    +`      <field name="MUSTER">${Blockly.Words['BLOCKLY-PLUS_regex_example_muster']}</field>`
+    +'  <value name="PATTERN">'
+    +'    <shadow type="BLOCKLY-PLUS_regex_fix">'
+    +`      <field name="PATTERN">${Blockly.Words['BLOCKLY-PLUS_regex_example_pattern']}</field>`
     +'      <field name="FLAG">ig</field>'
     +'    </shadow>'
     +'  </value>'
@@ -113,14 +129,14 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_test'] = {
         .setCheck('String')
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Words['BLOCKLY-PLUS_regex_test_match'][systemLang]);
-    this.appendValueInput('MUSTER')
+    this.appendValueInput('PATTERN')
         .setCheck('Regex')
         .appendField(Blockly.Words['BLOCKLY-PLUS_regex_test_pattern'][systemLang]);
         //.appendShadowBlock('regex_regex');
 
     this.setInputsInline(true);
     this.setOutput(true, 'Boolean');
-    this.setColour(Blockly.Constants.Text.HUE);
+    this.setColour(Blockly.Regex.HUE);
     this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_test_tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_test_tooltip'][systemLang]);
   }
@@ -128,10 +144,9 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_test'] = {
 
 Blockly.JavaScript['BLOCKLY-PLUS_regex_test'] = function(block) {
   let text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_NONE);
-  let muster = Blockly.JavaScript.valueToCode(block, 'MUSTER', Blockly.JavaScript.ORDER_MEMBER);
-  return [`${muster}.test(${text})`, Blockly.JavaScript.ORDER_FUNCTION_CALL];
+  let pattern = Blockly.JavaScript.valueToCode(block, 'PATTERN', Blockly.JavaScript.ORDER_MEMBER);
+  return [`${pattern}.test(${text})`, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
-
 
 // --- regex_match --------------------------------------------------
 Blockly.Words['BLOCKLY-PLUS_regex_match_find']              = {'en': 'Find in',       'de': 'Findet in'       };
@@ -146,7 +161,7 @@ Blockly.Words['BLOCKLY-PLUS_regex_match_nr_behind']         = {'en': 'behind #',
 Blockly.Words['BLOCKLY-PLUS_regex_match_tooltip']           = {'en': '',              'de': ''            };
 Blockly.Words['BLOCKLY-PLUS_regex_match_helpurl']           = {'en': '',              'de': ''            };
 
-Blockly.Test.blocks['BLOCKLY-PLUS_regex_match'] =
+Blockly.Regex.blocks['BLOCKLY-PLUS_regex_match'] =
     '<block type="BLOCKLY-PLUS_regex_match">'
     +'  <mutation nr_input="false"></mutation>'
     +`  <field name="SELECTOR">${Blockly.Words['BLOCKLY-PLUS_regex_match_first'][systemLang]}</field>`
@@ -155,9 +170,9 @@ Blockly.Test.blocks['BLOCKLY-PLUS_regex_match'] =
     +`      <field name="TEXT">${Blockly.Words['BLOCKLY-PLUS_regex_example_text'][systemLang]}</field>`
     +'    </block>'
     +'  </value>'
-    +'  <value name="MUSTER">'
-    +'    <shadow type="BLOCKLY-PLUS_regex_Fix">'
-    +`      <field name="MUSTER">${Blockly.Words['BLOCKLY-PLUS_regex_example_muster']}</field>`
+    +'  <value name="PATTERN">'
+    +'    <shadow type="BLOCKLY-PLUS_regex_fix">'
+    +`      <field name="PATTERN">${Blockly.Words['BLOCKLY-PLUS_regex_example_pattern']}</field>`
     +'      <field name="FLAG">ig</field>'
     +'    </shadow>'
     +'  </value>'
@@ -171,14 +186,14 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_match'] = {
         .appendField(Blockly.Words['BLOCKLY-PLUS_regex_match_find'][systemLang]);
         //.appendShadowBlock('text', {TEXT: Blockly.Words['BLOCKLY-PLUS_regex_example_text'][systemLang]} );
 
-    this.appendValueInput('MUSTER')
+    this.appendValueInput('PATTERN')
         .setCheck(['String', 'Regex'])
         .appendField(Blockly.Words['BLOCKLY-PLUS_regex_match_pattern'][systemLang])
         .setAlign(Blockly.ALIGN_RIGHT);
         //.appendShadowBlock('regex_regex');
 
     this.setInputsInline(true);
-    this.setColour(Blockly.Constants.Text.HUE);
+    this.setColour(Blockly.Regex.HUE);
     this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_match_tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_match_helpurl'][systemLang]);
   },
@@ -198,8 +213,8 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_match'] = {
 
   updateShape_: function(option = null) {
     let selector = this.getField('SELECTOR');
-    option === null && selector && ( option = selector.getValue() );
-    this.NrInput_ = /Nr/.test(option);
+    if (option === null && selector) option = selector.getValue();
+    this.NrInput_ = /NR/.test(option);
 
     this.setOutput(true, (option == 'ALL') ? ['String', 'Array'] : 'String')
 
@@ -211,9 +226,9 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_match'] = {
           .appendField(selector, 'SELECTOR')
           .setAlign(Blockly.ALIGN_RIGHT);
           //.appendShadowBlock('math_number', {NUM: 2} );
-      this.moveInputBefore('NR', 'MUSTER');
+      this.moveInputBefore('NR', 'PATTERN');
     } else {
-      this.getInput('MUSTER')
+      this.getInput('PATTERN')
           .insertFieldAt(0, this.createSelector_(option), 'SELECTOR')
     }
     this.initSvg();
@@ -221,7 +236,7 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_match'] = {
 
   createSelector_: function(option = null) {
     let nrInput = this.getInput('NR');
-    this.getField('SELECTOR') && this.getInput( nrInput ? 'NR' : 'MUSTER' ).removeField('SELECTOR');
+    this.getField('SELECTOR') && this.getInput( nrInput ? 'NR' : 'PATTERN' ).removeField('SELECTOR');
     this.removeInput('NR', true);
 
     let list = [
@@ -232,9 +247,7 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_match'] = {
       [ Blockly.Words['BLOCKLY-PLUS_regex_match_nr_behind'][systemLang], 'BEHIND_NR']
     ];
 
-    let validator = function(newValue) {
-      this.sourceBlock_.updateShape_(newValue);
-    }
+    let validator = (newValue) => { this.updateShape_(newValue) };
     let selector = new Blockly.FieldDropdown(list, validator);
     if (option) selector.setValue(option);
 
@@ -244,7 +257,7 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_match'] = {
 
 Blockly.JavaScript['BLOCKLY-PLUS_regex_match'] = function(block) {
   let text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_MEMBER);
-  let muster = Blockly.JavaScript.valueToCode(block, 'MUSTER', Blockly.JavaScript.ORDER_NONE);
+  let pattern = Blockly.JavaScript.valueToCode(block, 'PATTERN', Blockly.JavaScript.ORDER_NONE);
   let selectorNr = block.getFieldValue('SELECTOR');
   let nr = Blockly.JavaScript.valueToCode(block, 'NR', Blockly.JavaScript.ORDER_NONE) || 1;
   let codeNr, functionName;
@@ -268,29 +281,29 @@ Blockly.JavaScript['BLOCKLY-PLUS_regex_match'] = function(block) {
   ) : '';
 
   let code = (selectorNr === 'ALL') ?
-      `${text}.match(${muster})${codeNr} || null` :
-      `(${text}.match(${muster}) || [])${codeNr} || null` ;
+      `${text}.match(${pattern})${codeNr} || null` :
+      `(${text}.match(${pattern}) || [])${codeNr} || null` ;
   return [code, Blockly.JavaScript.ORDER_LOGICAL_OR];
 };
 
 
-// --- regex_Fix --------------------------------------------------
+// --- regex_fix --------------------------------------------------
 Blockly.Words['BLOCKLY-PLUS_regex_replace_in']                  = {'en': 'Replace in',    'de': 'Ersetzt in'  };
-Blockly.Words['BLOCKLY-PLUS_regex_replace_muster']              = {'en': 'pattern',       'de': 'Muster'      };
+Blockly.Words['BLOCKLY-PLUS_regex_replace_pattern']              = {'en': 'pattern',       'de': 'Muster'      };
 Blockly.Words['BLOCKLY-PLUS_regex_replace_with']                = {'en': 'with',          'de': 'mit'         };
 Blockly.Words['BLOCKLY-PLUS_regex_replace_tooltip']             = {'en': '',              'de': ''            };
 Blockly.Words['BLOCKLY-PLUS_regex_replace_helpurl']             = {'en': '',              'de': ''            };
 
-Blockly.Test.blocks['BLOCKLY-PLUS_regex_replace'] =
+Blockly.Regex.blocks['BLOCKLY-PLUS_regex_replace'] =
     '<block type="BLOCKLY-PLUS_regex_replace">'
     +'  <value name="TEXT">'
     +'    <block type="text">'
     +`      <field name="TEXT">${Blockly.Words['BLOCKLY-PLUS_regex_example_text'][systemLang]}</field>`
     +'    </block>'
     +'  </value>'
-    +'  <value name="MUSTER">'
-    +'    <shadow type="BLOCKLY-PLUS_regex_Fix">'
-    +`      <field name="MUSTER">${Blockly.Words['BLOCKLY-PLUS_regex_example_muster']}</field>`
+    +'  <value name="PATTERN">'
+    +'    <shadow type="BLOCKLY-PLUS_regex_fix">'
+    +`      <field name="PATTERN">${Blockly.Words['BLOCKLY-PLUS_regex_example_pattern']}</field>`
     +'      <field name="FLAG">ig</field>'
     +'    </shadow>'
     +'  </value>'
@@ -308,9 +321,9 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_replace'] = {
         .setAlign(Blockly.ALIGN_RIGHT)
         .appendField(Blockly.Words['BLOCKLY-PLUS_regex_replace_in'][systemLang]);
         //.appendShadowBlock('text', {TEXT: Blockly.Words['BLOCKLY-PLUS_regex_example_text'][systemLang]} );
-    this.appendValueInput('MUSTER')
+    this.appendValueInput('PATTERN')
         .setCheck(['String', 'Regex'])
-        .appendField(Blockly.Words['BLOCKLY-PLUS_regex_replace_muster'][systemLang])
+        .appendField(Blockly.Words['BLOCKLY-PLUS_regex_replace_pattern'][systemLang])
         .setAlign(Blockly.ALIGN_RIGHT);
         //.appendShadowBlock('regex_regex');
     this.appendValueInput('NEW_TEXT')
@@ -321,7 +334,7 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_replace'] = {
 
     this.setInputsInline(true);
     this.setOutput(true, 'String');
-    this.setColour(Blockly.Constants.Text.HUE);
+    this.setColour(Blockly.Regex.HUE);
     this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_replace_tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_replace_helpurl'][systemLang]);
   }
@@ -329,10 +342,10 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_replace'] = {
 
 Blockly.JavaScript['BLOCKLY-PLUS_regex_replace'] = function(block) {
   let text = Blockly.JavaScript.valueToCode(block, 'TEXT', Blockly.JavaScript.ORDER_MEMBER);
-  let muster = Blockly.JavaScript.valueToCode(block, 'MUSTER', Blockly.JavaScript.ORDER_COMMA);
+  let pattern = Blockly.JavaScript.valueToCode(block, 'PATTERN', Blockly.JavaScript.ORDER_COMMA);
   let newText = Blockly.JavaScript.valueToCode(block, 'NEW_TEXT', Blockly.JavaScript.ORDER_COMMA);
 
-  let code = `${text}.replace(${muster}, ${newText})`;
+  let code = `${text}.replace(${pattern}, ${newText})`;
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 };
 /**/
