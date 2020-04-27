@@ -13,7 +13,7 @@ if (!Blockly.CustomBlocks.includes('Regex')) {
   Blockly.CustomBlocks.push('Regex');
 
   Blockly.Regex = {
-    HUE: '#3fa684',
+    HUE: '#7eceb3',
     blocks: {}
   };
 }
@@ -156,7 +156,7 @@ Blockly.Words['BLOCKLY-PLUS_regex_match_first']             = {'en': 'first',   
 Blockly.Words['BLOCKLY-PLUS_regex_match_last']              = {'en': 'last',          'de': 'letztes'         };
 Blockly.Words['BLOCKLY-PLUS_regex_match_all']               = {'en': 'all',           'de': 'alle'            };
 Blockly.Words['BLOCKLY-PLUS_regex_match_nr']                = {'en': '#',             'de': 'Nr'              };
-Blockly.Words['BLOCKLY-PLUS_regex_match_nr_behind']         = {'en': 'behind #',      'de': 'Nr von hinten'   };
+Blockly.Words['BLOCKLY-PLUS_regex_match_behind_nr']         = {'en': 'behind #',      'de': 'Nr von hinten'   };
 
 Blockly.Words['BLOCKLY-PLUS_regex_match_tooltip']           = {'en': '',              'de': ''            };
 Blockly.Words['BLOCKLY-PLUS_regex_match_helpurl']           = {'en': '',              'de': ''            };
@@ -196,30 +196,39 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_match'] = {
     this.setColour(Blockly.Regex.HUE);
     this.setTooltip(Blockly.Words['BLOCKLY-PLUS_regex_match_tooltip'][systemLang]);
     this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_regex_match_helpurl'][systemLang]);
-  },
-
-  NrInput_: false,
-
-  mutationToDom: function() {
-    let container = Blockly.utils.xml.createElement('mutation');
-    container.setAttribute('nr_input', this.NrInput_);
-    return container;
-  },
-
-  domToMutation: function(xmlElement) {
-    this.NrInput_ = (xmlElement.getAttribute('nr_input') == 'true');
     this.updateShape_();
   },
 
-  updateShape_: function(option = null) {
+  option_: 'FIRST',
+
+  // save selector option
+  mutationToDom: function() {
+    let container = Blockly.utils.xml.createElement('mutation');
+    container.setAttribute('option', this.option_);
+    return container;
+  },
+
+  // restore selector option
+  domToMutation: function(xmlElement) {
+    this.option_ = xmlElement.getAttribute('option') || this.option_;
+    this.updateShape_();
+  },
+
+  updateShape_: function(option = this.option_) {
+    this.option_ = option;
     let selector = this.getField('SELECTOR');
-    if (option === null && selector) option = selector.getValue();
-    this.NrInput_ = /NR/.test(option);
+    let hasNrInput = /NR/.test(option);
 
-    this.setOutput(true, (option == 'ALL') ? ['String', 'Array'] : 'String')
+    // set output-connection
+    this.setOutput(true, (option == 'ALL') ? ['String', 'Array'] : 'String');
 
-    if (this.NrInput_) {
-      let selector = this.createSelector_(option);
+    // has number input
+    if (hasNrInput && !this.getInput('NR')) {
+      // remove field, if exist
+      if (selector) this.getInput('PATTERN').removeField('SELECTOR');
+
+      // set new valueInput
+      selector = this.getSelector_(selector);
       this.appendValueInput('NR')
           .setCheck('Number')
           .setAlign(Blockly.ALIGN_RIGHT)
@@ -227,31 +236,38 @@ Blockly.Blocks['BLOCKLY-PLUS_regex_match'] = {
           .setAlign(Blockly.ALIGN_RIGHT);
           //.appendShadowBlock('math_number', {NUM: 2} );
       this.moveInputBefore('NR', 'PATTERN');
-    } else {
-      this.getInput('PATTERN')
-          .insertFieldAt(0, this.createSelector_(option), 'SELECTOR')
+
+    // hasn't number input
+    } else if(!hasNrInput && (!selector || selector.getParentInput().name != 'PATTERN')) {
+      // remove input, if exist
+      this.removeInput('NR', true);
+
+      // set new field
+      this.getInput('PATTERN').insertFieldAt(0, this.getSelector_(selector), 'SELECTOR');
     }
-    this.initSvg();
   },
 
-  createSelector_: function(option = null) {
-    let nrInput = this.getInput('NR');
-    this.getField('SELECTOR') && this.getInput( nrInput ? 'NR' : 'PATTERN' ).removeField('SELECTOR');
-    this.removeInput('NR', true);
+  getSelector_: function(selector) {
+    // Validator for selector
+    let validator = (newValue) => this.updateShape_(newValue);
 
-    let list = [
-      [ Blockly.Words['BLOCKLY-PLUS_regex_match_first'][systemLang],     'FIRST'    ],
-      [ Blockly.Words['BLOCKLY-PLUS_regex_match_last'][systemLang],      'LAST'     ],
-      [ Blockly.Words['BLOCKLY-PLUS_regex_match_all'][systemLang],       'ALL'      ],
-      [ Blockly.Words['BLOCKLY-PLUS_regex_match_nr'][systemLang],        'NR'       ],
-      [ Blockly.Words['BLOCKLY-PLUS_regex_match_nr_behind'][systemLang], 'BEHIND_NR']
-    ];
+    // new selector, if it not exist
+    if (!selector) {
+      // @return {[human-readable, language-neutral]}  option for list
+      let getOption = ( name, lowerName = name.toLowerCase() ) =>
+          [ Blockly.Words['BLOCKLY-PLUS_regex_match_'+lowerName][systemLang], name ];
 
-    let validator = (newValue) => { this.updateShape_(newValue) };
-    let selector = new Blockly.FieldDropdown(list, validator);
-    if (option) selector.setValue(option);
+      // generate optionlist
+      let optionList = ['FIRST', 'LAST', 'ALL', 'NR', 'BEHIND_NR'];
+      optionList.forEach( (item, i) => optionList[i] = getOption(item) );
 
-    return selector;
+      return selector = new Blockly.FieldDropdown(optionList, validator)
+
+    // restore validator, if selector exist
+    } else {
+      selector.setValidator(validator);
+      return selector;
+    }
   }
 }
 
@@ -269,12 +285,10 @@ Blockly.JavaScript['BLOCKLY-PLUS_regex_match'] = function(block) {
   (selectorNr === 'BEHIND_NR') ? (
     functionName = Blockly.JavaScript.provideFunction_(
       'getLastElement',
-      ["Array.prototype." + Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_ + " = function (n = 1) {",
-       "  if (this == null) return void 0;",
-       //"  if (n === null) return this[this.length - 1];",
-       //"  return this.slice(Math.max(this.length - n, 0));",
-       "  return this[Math.max(this.length - n, 0)];",
-       "};"
+      [`Array.prototype.${Blockly.JavaScript.FUNCTION_NAME_PLACEHOLDER_} = function (n=1) {`,
+       `  if (this == null) return void 0;`,
+       `  return this[Math.max(this.length - n, 0)];`,
+       `};`
       ]
     ),
     codeNr = `.${functionName}(${nr}-1)`
