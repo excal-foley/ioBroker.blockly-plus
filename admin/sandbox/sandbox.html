@@ -22,10 +22,6 @@
       // set systemLang for ioBroker words
       var systemLang = Code.getLang();
 
-      function getHelp(word) {
-          return 'https://github.com/ioBroker/ioBroker.javascript/blob/master/README.md#' + Blockly.Words[word][systemLang];
-      }
-
       if (!scripts) var scripts = {
           get blocklyWorkspace() { return Blockly.getMainWorkspace() }
       };
