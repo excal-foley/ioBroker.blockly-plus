@@ -88,7 +88,7 @@ Blockly.BlocklyPlus = {
  * @param  {?string[]}  [selectInputs=null] names of inputs which to take into account
  *                                          If null then all inputs are considered
  */
-Blockly.Blockly.checksPassThrough = function(block, event, in2out = true, out2in = true, selectInputs = null) {
+Blockly.Constants.checksPassThrough = function(block, event, in2out = true, out2in = true, selectInputs = null) {
   let blockCreate = event.type == 'create' && ( event.blockId == block.id ||
                                                 event.ids.includes(block.id) );
   let blockPlugged = event.type == 'move' && ( event.blockId == block.id &&
