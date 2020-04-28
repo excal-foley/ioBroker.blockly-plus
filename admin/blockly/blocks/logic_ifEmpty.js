@@ -1,12 +1,16 @@
 'use strict';
 
+goog.provide('Blockly.JavaScript.Other');
+
+goog.require('Blockly.JavaScript');
+
 // --- logic_ifEmpty --------------------------------------------------
 Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty']                    = {'en': 'if empty',      'de': 'falls leer'  };
 Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_then']               = {'en': 'then',          'de': 'dann'        };
 Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_tooltip']            = {'en': '',              'de': ''            };
 Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_helpurl']            = {'en': '',              'de': ''            };
 
-Blockly.Test.blocks['BLOCKLY-PLUS_logic_ifEmpty'] =
+Blockly.Other.blocks['BLOCKLY-PLUS_logic_ifEmpty'] =
     '  <block type="BLOCKLY-PLUS_logic_ifEmpty">'
     +'  </block>';
 

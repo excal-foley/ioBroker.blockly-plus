@@ -1,22 +1,27 @@
 'use strict';
+/**
+ * #######################################################################
+ * ############################  DEVELOPMENT  ############################
+ * #######################################################################
+ */
 
-//goog.provide('Blockly.JavaScript.Test');
+//goog.provide('Blockly.JavaScript.Other');
 
 goog.require('Blockly.JavaScript');
 
 // --- math_rnd_multiple --------------------------------------------------
-Blockly.Words['math_rnd_multiple_rounds']             = {'en': 'Rounds',                  'de': 'Runde'};
-Blockly.Words['math_rnd_multiple_roundup']            = {'en': 'Round Up',                'de': 'Runde auf'};
-Blockly.Words['math_rnd_multiple_rounddown']          = {'en': 'Round Down',              'de': 'Runde ab'};
-Blockly.Words['math_rnd_multiple_multiple_of']        = {'en': 'to multiple of',          'de': 'zu Vielfaches von'};
-Blockly.Words['math_rnd_multiple_absolut']            = {'en': '|  Absolute',             'de': '|  Betrag'};
-Blockly.Words['math_rnd_multiple_value']              = {'en': '|  Value',                'de': '|  Wert'};
-Blockly.Words['math_rnd_multiple_Tooltip']            = {'en': '',                        'de': ''};
-Blockly.Words['math_rnd_multiple_HelpUrl']            = {'en': '',                        'de': ''};
+Blockly.Words['Blockly-Plus_math_rnd_multiple_rounds']             = {'en': 'Rounds',                  'de': 'Runde'};
+Blockly.Words['Blockly-Plus_math_rnd_multiple_roundup']            = {'en': 'Round Up',                'de': 'Runde auf'};
+Blockly.Words['Blockly-Plus_math_rnd_multiple_rounddown']          = {'en': 'Round Down',              'de': 'Runde ab'};
+Blockly.Words['Blockly-Plus_math_rnd_multiple_multiple_of']        = {'en': 'to multiple of',          'de': 'zu Vielfaches von'};
+Blockly.Words['Blockly-Plus_math_rnd_multiple_absolut']            = {'en': '|  Absolute',             'de': '|  Betrag'};
+Blockly.Words['Blockly-Plus_math_rnd_multiple_value']              = {'en': '|  Value',                'de': '|  Wert'};
+Blockly.Words['Blockly-Plus_math_rnd_multiple_Tooltip']            = {'en': '',                        'de': ''};
+Blockly.Words['Blockly-Plus_math_rnd_multiple_HelpUrl']            = {'en': '',                        'de': ''};
 
 
-Blockly.Test.blocks['math_rnd_multiple'] =
-    '<block type="math_rnd_multiple">'
+Blockly.Develop.blocks['Blockly-Plus_math_rnd_multiple'] =
+    '<block type="Blockly-Plus_math_rnd_multiple">'
     +'  <field name="DIRECTION">ROUNDS</field>'
     +'  <value name="NUMBER">'
     +'    <shadow type="math_number">'
@@ -30,31 +35,33 @@ Blockly.Test.blocks['math_rnd_multiple'] =
     +'  </value>'
     +'</block>';
 
-Blockly.Blocks['math_rnd_multiple'] = {
+Blockly.Blocks['Blockly-Plus_math_rnd_multiple'] = {
   init: function() {
     let validator = function(newValue) {
       var isRounds = (newValue == 'ROUNDS');
       this.sourceBlock_.updateShape_(isRounds);
     };
 
+    let optionList = [
+      [Blockly.Words['Blockly-Plus_math_rnd_multiple_rounds'][systemLang],"ROUNDS"],
+      [Blockly.Words['Blockly-Plus_math_rnd_multiple_roundup'][systemLang],"ROUNDUP"],
+      [Blockly.Words['Blockly-Plus_math_rnd_multiple_rounddown'][systemLang],"ROUNDDOWN"]
+    ];
+
     this.appendValueInput('NUMBER')
         .setCheck('Number')
-        .appendField(new Blockly.FieldDropdown([
-                [Blockly.Words['math_rnd_multiple_rounds'][systemLang],"ROUNDS"],
-                [Blockly.Words['math_rnd_multiple_roundup'][systemLang],"ROUNDUP"],
-                [Blockly.Words['math_rnd_multiple_rounddown'][systemLang],"ROUNDDOWN"]
-        ], validator), "DIRECTION");
+        .appendField(new Blockly.FieldDropdown(optionList, validator), "DIRECTION");
       //  .appendShadowBlock('math_number', {NUM: 3.1415} );
     this.appendValueInput('MULTIPLE')
         .setCheck('Number')
-        .appendField(Blockly.Words['math_rnd_multiple_multiple_of'][systemLang]);
+        .appendField(Blockly.Words['Blockly-Plus_math_rnd_multiple_multiple_of'][systemLang]);
     //    .appendShadowBlock('math_number', {NUM: 0.01} );
 
     this.setInputsInline(true);
     this.setOutput(true, 'Number');
     this.setColour(Blockly.Constants.Math.HUE);
-    this.setTooltip(Blockly.Words['math_rnd_multiple_Tooltip'][systemLang]);
-    this.setHelpUrl(Blockly.Words['math_rnd_multiple_HelpUrl'][systemLang]);
+    this.setTooltip(Blockly.Words['Blockly-Plus_math_rnd_multiple_Tooltip'][systemLang]);
+    this.setHelpUrl(Blockly.Words['Blockly-Plus_math_rnd_multiple_HelpUrl'][systemLang]);
     Blockly.BlocklyPlus.Marker(this);
   },
 
@@ -88,18 +95,19 @@ Blockly.Blocks['math_rnd_multiple'] = {
     // Add or remove a Value Input.
     var inputExists = this.getInput('INPUT_VALUETYPE');
     if (!isRounds && !inputExists) {
+      let optionList = [
+          [Blockly.Words['Blockly-Plus_math_rnd_multiple_absolut'][systemLang], "ABSOLUT"],
+          [Blockly.Words['Blockly-Plus_math_rnd_multiple_value'][systemLang], "VALUE"]  ];
+
       this.appendDummyInput('INPUT_VALUETYPE')
-          .appendField(new Blockly.FieldDropdown([
-                    [Blockly.Words['math_rnd_multiple_absolut'][systemLang], "ABSOLUT"],
-                    [Blockly.Words['math_rnd_multiple_value'][systemLang], "VALUE"]
-          ]), "VALUETYPE");
+          .appendField(new Blockly.FieldDropdown(optionList), "VALUETYPE");
     } else if (isRounds && inputExists) {
       this.removeInput('INPUT_VALUETYPE');
     }
   }
 }
 
-Blockly.JavaScript['math_rnd_multiple'] = function(block) {
+Blockly.JavaScript['Blockly-Plus_math_rnd_multiple'] = function(block) {
 
   let number = Blockly.JavaScript.valueToCode(block, 'NUMBER', Blockly.JavaScript.ORDER_ATOMIC);
   let multiple = Blockly.JavaScript.valueToCode(block, 'MULTIPLE', Blockly.JavaScript.ORDER_ATOMIC);
@@ -139,9 +147,7 @@ Blockly.JavaScript['math_rnd_multiple'] = function(block) {
   ignoreSign = ignoreSign ? ', true' : '';
   let direction = directionText == 'ROUNDDOWN' ? ', -1' :
                   directionText == 'ROUNDUP'   ? ', 1' :
-                  ignoreSign != ''             ? ', 0' :
-                                                 '';
-  let code = functionName + '(' + number + ', '
-              + multiple + direction + ignoreSign + ')';
+                  ignoreSign != ''             ? ', 0' : '';
+  let code = `${functionName}(${number}, ${multiple}${direction}${ignoreSign})`;
   return [code, Blockly.JavaScript.ORDER_FUNCTION_CALL];
 }

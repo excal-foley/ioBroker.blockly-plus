@@ -5,23 +5,19 @@ goog.provide('Blockly.JavaScript.Regex');
 goog.require('Blockly.JavaScript');
 
 // --- Category Regex --------------------------------------------------
-Blockly.Words['Regex']                                = {'en': 'Pattern',                  'de': 'Muster'};
+Blockly.Words['Regex'] = {'en': 'Pattern',                  'de': 'Muster'};
 
-Blockly.CustomBlocks = Blockly.CustomBlocks || [];
+Blockly.CustomBlocks.push('Regex');
 
-if (!Blockly.CustomBlocks.includes('Regex')) {
-  Blockly.CustomBlocks.push('Regex');
-
-  Blockly.Regex = {
-    HUE: '#389475',
-    blocks: {}
-  };
-}
+Blockly.Regex = {
+  HUE: '#389475',
+  blocks: {}
+};
 
 // --- Words Example --------------------------------------------------
-Blockly.Words['BLOCKLY-PLUS_regex_example_text']          = {'en': 'This (bracketed) text is found',  'de': 'Der (eingeklammerte) Text wird gefunden'  };
+Blockly.Words['BLOCKLY-PLUS_regex_example_text']          = {'en': 'The bracketed text is (found)',  'de': 'Der eingeklammerte Text wird (gefunden)'  };
 Blockly.Words['BLOCKLY-PLUS_regex_example_pattern']        = '\\([^\\(\\)]*\\)';
-Blockly.Words['BLOCKLY-PLUS_regex_example_replace']       = {'en': 'excluded',  'de': 'ausgeklammerte'  };
+Blockly.Words['BLOCKLY-PLUS_regex_example_replace']       = {'en': 'replaced',  'de': 'ersetzt'  };
 
 // --- regex_fix --------------------------------------------------
 Blockly.Words['BLOCKLY-PLUS_regex_fix_tooltip']            = {'en': '',              'de': ''            };

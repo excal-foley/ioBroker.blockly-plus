@@ -1,6 +1,11 @@
 'use strict';
+/**
+ * #######################################################################
+ * ############################  DEVELOPMENT  ############################
+ * #######################################################################
+ */
 
-//goog.provide('Blockly.JavaScript.Test');
+//goog.provide('Blockly.JavaScript.Other');
 
 goog.require('Blockly.JavaScript');
 
@@ -15,7 +20,7 @@ goog.require('Blockly.JavaScript');
  * @param {string} opt_FieldName          Name from opt_containsValue.
  * @return {string} value from parent
  */
-Blockly.Test.getValueFromParent = function(block, RegexValue, parentTypes,
+Blockly.Develop.getValueFromParent = function(block, RegexValue, parentTypes,
                                         opt_containsValue = null,
                                         opt_FieldName = null) {
   // check if already on calculate
@@ -51,7 +56,7 @@ Blockly.Test.getValueFromParent = function(block, RegexValue, parentTypes,
 }
 
 // --- getIndex -----------------------------------------------------------
-Blockly.Test.blocks['loops_getIndex'] =
+Blockly.Develop.blocks['loops_getIndex'] =
     '<block type="loops_getIndex">'
     +'</block>';
 
@@ -121,7 +126,7 @@ return [varName, Blockly.JavaScript.ORDER_ATOMIC];
 }
 
 // --- getIndexVar -----------------------------------------------------------
-Blockly.Test.blocks['loops_getIndexVar'] =
+Blockly.Develop.blocks['loops_getIndexVar'] =
     '<block type="loops_getIndexVar">'
     +'</block>';
 

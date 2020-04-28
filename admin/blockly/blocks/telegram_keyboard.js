@@ -1,9 +1,13 @@
 'use strict';
+/**
+ * #######################################################################
+ * ############################  DEVELOPMENT  ############################
+ * #######################################################################
+ */
 
-//To-Do:
-// sendto_telegram_setKeyboard sento löschen
+// TODO: add USERNAME, Image-Option
 
-goog.provide('Blockly.JavaScript.Test');
+//goog.provide('Blockly.JavaScript.Sendto');
 
 goog.require('Blockly.JavaScript');
 
@@ -20,8 +24,8 @@ Blockly.Words['telegram_setKeyboard_msg_text']      = {'en': 'updated keyboard',
 Blockly.Words['telegram_setKeyboard_tooltip']       = {'en': 'Send message to telegram',    'de': 'Sende eine Meldung über Telegram',   'pt': 'Enviar mensagem para telegrama', 'pl': 'Wyślij wiadomość do telegramu',      'nl': 'Stuur bericht naar telegram',    'it': 'Invia messaggio al telegramma',  'es': 'Enviar mensaje al telegrama',    'fr': 'Envoyer un message au télégramme',   'ru': 'Послать сообщение через Telegram'};
 Blockly.Words['telegram_setKeyboard_help']          = {'en': 'https://github.com/ioBroker/ioBroker.telegram/blob/master/README.md', 'de': 'https://github.com/ioBroker/ioBroker.telegram/blob/master/README.md', 'pt': 'https://github.com/ioBroker/ioBroker.telegram/blob/master/README.md', 'pl': 'https://github.com/ioBroker/ioBroker.telegram/blob/master/README.md', 'nl': 'https://github.com/ioBroker/ioBroker.telegram/blob/master/README.md', 'it': 'https://github.com/ioBroker/ioBroker.telegram/blob/master/README.md', 'es': 'https://github.com/ioBroker/ioBroker.telegram/blob/master/README.md', 'fr': 'https://github.com/ioBroker/ioBroker.telegram/blob/master/README.md', 'ru': 'https://github.com/ioBroker/ioBroker.telegram/blob/master/README.md'};
 
-Blockly.Test.blocks['sendto_telegram_setKeyboard'] =
-    '<block type="sendto_telegram_setKeyboard">'
+Blockly.Develop.blocks['telegram_setKeyboard'] =
+    '<block type="telegram_setKeyboard">'
     +'  <field name="INSTANCE"></field>'
     +'  <field name="NOT_RESIZE">TRUE</field>'
     +'  <field name="ONE_TIME">FALSE</field>'
@@ -73,7 +77,7 @@ Blockly.Test.blocks['sendto_telegram_setKeyboard'] =
     +'  </value>'
     +'</block>';
 
-Blockly.Blocks['sendto_telegram_setKeyboard'] = {
+Blockly.Blocks['telegram_setKeyboard'] = {
     init: function() {
         var options = [[Blockly.Words['telegram_setKeyboard_anyInstance'][systemLang], '']];
         if (typeof main !== 'undefined' && main.instances) {
@@ -139,7 +143,7 @@ Blockly.Blocks['sendto_telegram_setKeyboard'] = {
     }
 };
 
-Blockly.JavaScript['sendto_telegram_setKeyboard'] = function(block) {
+Blockly.JavaScript['telegram_setKeyboard'] = function(block) {
     var dropdown_instance = block.getFieldValue('INSTANCE');
     var value_keyboard = Blockly.JavaScript.valueToCode(block, 'KEYBOARD', Blockly.JavaScript.ORDER_ATOMIC);
     var value_message = Blockly.JavaScript.valueToCode(block, 'MESSAGE', Blockly.JavaScript.ORDER_ATOMIC) || 'Neue Tastatur';

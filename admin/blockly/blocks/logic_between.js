@@ -1,6 +1,6 @@
 'use strict';
 
-//goog.provide('Blockly.JavaScript.Test');
+goog.provide('Blockly.JavaScript.Other');
 
 goog.require('Blockly.JavaScript');
 
@@ -8,7 +8,7 @@ goog.require('Blockly.JavaScript');
 Blockly.Words['BLOCKLY-PLUS_logic_between_tooltip']            = {'en': '',              'de': ''            };
 Blockly.Words['BLOCKLY-PLUS_logic_between_helpurl']            = {'en': '',              'de': ''            };
 
-Blockly.Math.blocks['BLOCKLY-PLUS_logic_between'] =
+Blockly.Other.blocks['BLOCKLY-PLUS_logic_between'] =
     '  <block type="BLOCKLY-PLUS_logic_between">'
     +'    <field name="MIN_OPERATOR">LE</field>'
     +'    <field name="MAX_OPERATOR">LE</field>'

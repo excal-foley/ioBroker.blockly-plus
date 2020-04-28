@@ -1,17 +1,19 @@
 'use strict';
+/**
+ * #######################################################################
+ * ############################  DEVELOPMENT  ############################
+ * #######################################################################
+ */
 
-//goog.provide('Blockly.Blocks.texts');  // Deprecated
-goog.provide('Blockly.Constants');
+//goog.provide('Blockly.Blocks.Other');
 
-goog.require('Blockly.Blocks');
-goog.require('Blockly');
+goog.require('Blockly.JavaScript');
 
 Blockly.Multiplex = {};
 Blockly.Multiplex.field = {};
 Blockly.Multiplex.fields = {};
 Blockly.Multiplex.item = {};
 Blockly.Multiplex.validator = {};
-
 
 var systemLang = systemLang || 'en';//// TODO: delete this and mak compatible with ioBroker
 
@@ -474,7 +476,7 @@ Blockly.Multiplex.item.NUMBER = {
 
 Blockly.Multiplex.logic = {
   name: 'logic',
-  category: 'Test',
+  category: 'Develop',
   itemGroups: [{
     operatorIds: ['AND', 'OR'],
     fields: Blockly.Multiplex.fields.DROPDOWN_INPUT,
@@ -486,7 +488,7 @@ Blockly.Multiplex.logic = {
 
 Blockly.Multiplex.arith = {
   name: 'arith',
-  category: 'Test',
+  category: 'Develop',
   itemGroups: [{
     fields: Blockly.Multiplex.fields.DROPDOWN_INPUT,
     operatorIds: ['ADD', 'SUBTR', 'MULTI', 'DIVI', 'MOD', 'POW', 'ROOT'],
@@ -498,7 +500,7 @@ Blockly.Multiplex.arith = {
 
 Blockly.Multiplex.property = {
   name: 'property',
-  category: 'Test',
+  category: 'Develop',
   itemGroups: [ {
     fields: [ {"type": "input_dummy"},
               {"type": "field_label_operator"},
@@ -518,7 +520,7 @@ Blockly.Multiplex.property = {
 
 Blockly.Multiplex.all = {
   name: 'all',
-  category: 'Test',
+  category: 'Develop',
   items: ['ADD', 'SUBTR', 'MULTI', 'DIVI', 'MOD', 'POW', 'ROOT', 'AND', 'OR', 'DOT', 'SQUARE'],
   container: {style: { "colour": "#000000", "sytle": null, "tooltip": "", "args0": [ {"type": "input_dummy"}, { "type": "input_statement", "name": "STACK", "check": null} ] } },
   block: {style: { "colour": "#000000", "style": null, "tooltip": "", "helpUrl": "", "inputsInline": true, "output": "Boolean" } }
@@ -531,7 +533,7 @@ Blockly.Multiplex.generateBlock(Blockly.Multiplex.all);
 
 
 // --- math_set_operators --------------------------------------------------
-Blockly.Test.blocks['math_set_operators'] =
+Blockly.Develop.blocks['math_set_operators'] =
     '  <block type="math_set_operators">'
     +'  </block>';
 

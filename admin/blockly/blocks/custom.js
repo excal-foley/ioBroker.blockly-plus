@@ -26,7 +26,7 @@ Blockly.Blocks['system_input_code'] = {
 
     this.setOutput(true, null);
     this.setInputsInline(true);
-    this.setColour('#FF0000');
+    this.setColour(Blockly.Custom.HUE);
     this.setTooltip('');
     this.setHelpUrl('');
     Blockly.BlocklyPlus.Marker(this);
@@ -59,7 +59,7 @@ Blockly.Blocks['system_code'] = {
 
     this.setOutput(true, null);
     this.setInputsInline(true);
-    this.setColour('#FF0000');
+    this.setColour(Blockly.Custom.HUE);
     this.setTooltip('');
     this.setHelpUrl('');
     Blockly.BlocklyPlus.Marker(this);
@@ -84,7 +84,7 @@ Blockly.Blocks['system_connector'] = {
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setInputsInline(true);
-    this.setColour('#FF0000');
+    this.setColour(Blockly.Custom.HUE);
     this.setTooltip('');
     this.setHelpUrl('');
     Blockly.BlocklyPlus.Marker(this);

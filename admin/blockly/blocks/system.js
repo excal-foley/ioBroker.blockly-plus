@@ -1,11 +1,15 @@
 'use strict';
 
+goog.provide('Blockly.JavaScript.System');
+
+goog.require('Blockly.JavaScript');
+
 // --- getObject --------------------------------------------------
 Blockly.Words['BLOCKLY-PLUS_getObject']                    = {'en': 'getObject',      'de': 'getObject'  };
 Blockly.Words['BLOCKLY-PLUS_getObject_Tooltip']            = {'en': '',              'de': ''            };
 Blockly.Words['BLOCKLY-PLUS_getObject_HelpUrl']            = {'en': '',              'de': ''            };
 
-Blockly.Test.blocks['BLOCKLY-PLUS_getObject'] =
+Blockly.System.blocks['BLOCKLY-PLUS_getObject'] =
     '<block type="BLOCKLY-PLUS_getObject">'
     +'  <value name="OBJECT_ID">'
     +'    <shadow type="field_oid">'
@@ -31,6 +35,6 @@ Blockly.Blocks['BLOCKLY-PLUS_getObject'] = {
 }
 
 Blockly.JavaScript['BLOCKLY-PLUS_getObject'] = function(block) {
-  var objectId = Blockly.JavaScript.valueToCode(block, 'OBJECT_ID', Blockly.JavaScript.ORDER_ATOMIC);
+  var objectId = Blockly.JavaScript.valueToCode(block, 'OBJECT_ID', Blockly.JavaScript.ORDER_FUNCTION_CALL);
   return [ `getObject(${objectId})`, Blockly.JavaScript.ORDER_FUNCTION_CALL ];
 }

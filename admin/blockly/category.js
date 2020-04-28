@@ -1,27 +1,39 @@
 'use strict';
 
-//goog.provide('Blockly.JavaScript.Action');
-
-//goog.require('Blockly.JavaScript');
-
 Blockly.CustomBlocks = Blockly.CustomBlocks || [];
 
+// --- Category Other --------------------------------------------------
+Blockly.Words['Other']                                = {'en': 'Other',                  'de': 'Sonstige'};
+
+Blockly.CustomBlocks.push('Other');
+
+Blockly.Other = {
+    HUE: '#ffffff',
+    blocks: {}
+};
+
 // --- Category Custom --------------------------------------------------
+/**
+ * These blocks are not intended for an official release
+ */
 Blockly.Words['Custom']                                = {'en': 'Custom',                  'de': 'Eigene'};
 
 Blockly.CustomBlocks.push('Custom');
 
 Blockly.Custom = {
-    HUE: '#FFFFFF',
+    HUE: '#ff4d4d',
     blocks: {}
 };
 
-// --- Category Test --------------------------------------------------
-Blockly.Words['Test']                                  = {'en': 'Test',                    'de': 'Test'};
+// --- Category Develop --------------------------------------------------
+/**
+ * These blocks are still under development
+ */
+Blockly.Words['Develop']                                  = {'en': 'Development',           'de': 'Entwicklung'};
 
-Blockly.CustomBlocks.push('Test');
+Blockly.CustomBlocks.push('Develop');
 
-Blockly.Test = {
+Blockly.Develop = {
     HUE: '#000000',
     blocks: {}
 };
