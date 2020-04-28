@@ -1,40 +1,38 @@
 'use strict';
 
 // --- logic_ifEmpty --------------------------------------------------
-Blockly.Words['logic_ifEmpty']                    = {'en': 'if empty',      'de': 'falls leer'  };
-Blockly.Words['logic_ifEmpty_then']               = {'en': 'then',          'de': 'dann'        };
-Blockly.Words['logic_ifEmpty_Tooltip']            = {'en': '',              'de': ''            };
-Blockly.Words['logic_ifEmpty_HelpUrl']            = {'en': '',              'de': ''            };
+Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty']                    = {'en': 'if empty',      'de': 'falls leer'  };
+Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_then']               = {'en': 'then',          'de': 'dann'        };
+Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_tooltip']            = {'en': '',              'de': ''            };
+Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_helpurl']            = {'en': '',              'de': ''            };
 
-Blockly.Test.blocks['logic_ifEmpty'] =
-    '  <block type="logic_ifEmpty">'
+Blockly.Test.blocks['BLOCKLY-PLUS_logic_ifEmpty'] =
+    '  <block type="BLOCKLY-PLUS_logic_ifEmpty">'
     +'  </block>';
 
-Blockly.Blocks['logic_ifEmpty'] = {
+Blockly.Blocks['BLOCKLY-PLUS_logic_ifEmpty'] = {
   init: function() {
     this.appendValueInput('VALUE')
         .setCheck(null)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Words['logic_ifEmpty'][systemLang]);
+        .appendField(Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty'][systemLang]);
     this.appendValueInput('DEFLT')
         .setCheck(null)
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField(Blockly.Words['logic_ifEmpty_then'][systemLang]);
+        .appendField(Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_then'][systemLang]);
 
     this.setOutput(true, null);
     this.setInputsInline(true);
     this.setColour(Blockly.Constants.Logic.HUE);
-    this.setTooltip(Blockly.Words['logic_ifEmpty_Tooltip'][systemLang]);
-    this.setHelpUrl(Blockly.Words['logic_ifEmpty_HelpUrl'][systemLang]);
+    this.setTooltip(Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_tooltip'][systemLang]);
+    this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_helpurl'][systemLang]);
     Blockly.BlocklyPlus.Marker(this);
   },
 
-  onchange: function(event) {
-    Blockly.Constants.checksPassThrough(this, event);
-  }
+  onchange: function(event) { Blockly.Constants.checksPassThrough(this, event) }
 }
 
-Blockly.JavaScript['logic_ifEmpty'] = function(block) {
+Blockly.JavaScript['BLOCKLY-PLUS_logic_ifEmpty'] = function(block) {
   let value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_LOGICAL_OR) || null;
   let deflt = Blockly.JavaScript.valueToCode(block, 'DEFLT', Blockly.JavaScript.ORDER_LOGICAL_OR) || null;
   return [value + ' || ' + deflt, Blockly.JavaScript.ORDER_LOGICAL_OR];
