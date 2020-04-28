@@ -5,59 +5,63 @@
 goog.require('Blockly.JavaScript');
 
 // --- logic_between --------------------------------------------------
-Blockly.Test.blocks['logic_between'] =
-    '  <block type="logic_between">'
-    +'    <field name="operator0">LE</field>'
-    +'    <field name="operator1">LE</field>'
-    +'    <value name="value0">'
+Blockly.Words['BLOCKLY-PLUS_logic_between_tooltip']            = {'en': '',              'de': ''            };
+Blockly.Words['BLOCKLY-PLUS_logic_between_helpurl']            = {'en': '',              'de': ''            };
+
+Blockly.Math.blocks['BLOCKLY-PLUS_logic_between'] =
+    '  <block type="BLOCKLY-PLUS_logic_between">'
+    +'    <field name="MIN_OPERATOR">LE</field>'
+    +'    <field name="MAX_OPERATOR">LE</field>'
+    +'    <value name="MIN">'
     +'      <block type="math_number">'
     +'        <field name="NUM">0</field>'
     +'      </block>'
     +'    </value>'
-    +'    <value name="value1">'
+    +'    <value name="VALUE">'
     +'      <shadow type="math_number">'
-    +'        <field name="NUM">32</field>'
+    +'        <field name="NUM">42</field>'
     +'      </shadow>'
     +'    </value>'
-    +'    <value name="value2">'
+    +'    <value name="MAX">'
     +'      <block type="math_number">'
     +'        <field name="NUM">100</field>'
     +'      </block>'
     +'    </value>'
     +'  </block>';
 
-Blockly.Blocks['logic_between'] = {
+Blockly.Blocks['BLOCKLY-PLUS_logic_between'] = {
   init: function() {
-    this.appendValueInput('value0')
+    this.appendValueInput('MIN')
         .setCheck('Number');
     //    .appendShadowBlock('math_number',{NUM: 0});
-    this.appendValueInput('value1')
+    this.appendValueInput('VALUE')
         .setCheck('Number')
         .appendField(new Blockly.FieldDropdown([ ['<', 'LT'],
-                                                 ['≤', 'LE'] ]), 'operator0');
+                                                 ['≤', 'LE'] ]), 'MIN_OPERATOR');
     //    .appendShadowBlock('math_number',{NUM: 32});
-    this.appendValueInput('value2')
+    this.appendValueInput('MAX')
         .setCheck('Number')
         .appendField(new Blockly.FieldDropdown([ ['<', 'LT'],
-                                                 ['≤', 'LE'] ]), 'operator1');
+                                                 ['≤', 'LE'] ]), 'MAX_OPERATOR');
     //    .appendShadowBlock('math_number',{NUM: 100});
 
     this.setInputsInline(true);
     this.setOutput(true, 'Boolean');
     this.setColour(Blockly.Constants.Logic.HUE);
-    this.setTooltip('');
-    this.setHelpUrl('');
+    this.setTooltip(Blockly.Words['BLOCKLY-PLUS_logic_between_tooltip'][systemLang]);
+    this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_logic_between_helpurl'][systemLang]);
     Blockly.BlocklyPlus.Marker(this);
   }
 }
 /**//***************************    Javascript    ***************************///
-Blockly.JavaScript['logic_between'] = function(block) {
+Blockly.JavaScript['BLOCKLY-PLUS_logic_between'] = function(block) {
 // Prüft ob der mittlere Wert zwischen den beiden Äußeren ist
-  let value0 = Blockly.JavaScript.valueToCode(block, 'value0', Blockly.JavaScript.ORDER_RELATIONAL) || 0;
-  let value1 = Blockly.JavaScript.valueToCode(block, 'value1', Blockly.JavaScript.ORDER_RELATIONAL) || 0;
-  let value2 = Blockly.JavaScript.valueToCode(block, 'value2', Blockly.JavaScript.ORDER_RELATIONAL) || 0;
-  let op0 = block.getFieldValue('operator0') == 'LT' ? '<' : '<=';
-  let op1 = block.getFieldValue('operator1') == 'LT' ? '<' : '<=';
+  let min = Blockly.JavaScript.valueToCode(block, 'MIN', Blockly.JavaScript.ORDER_RELATIONAL) || 0;
+  let value = Blockly.JavaScript.valueToCode(block, 'VALUE', Blockly.JavaScript.ORDER_RELATIONAL) || 0;
+  let max = Blockly.JavaScript.valueToCode(block, 'MAX', Blockly.JavaScript.ORDER_RELATIONAL) || 0;
+  let minOperator = block.getFieldValue('MIN_OPERATOR') == 'LT' ? '<' : '<=';
+  let maxOperator = block.getFieldValue('MAX_OPERATOR') == 'LT' ? '<' : '<=';
 
-  return [value0 + ' ' + op0 + ' ' + value1 + ' && ' + value1 + ' ' + op1 + ' ' + value2, Blockly.JavaScript.ORDER_LOGICAL_AND];
+  let code = `${min} ${minOperator} ${value} && ${value} ${maxOperator} ${max}`;
+  return [code, Blockly.JavaScript.ORDER_LOGICAL_AND];
 }
