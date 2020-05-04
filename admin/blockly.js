@@ -81,62 +81,65 @@ Blockly.BlocklyPlus = {
  * This function belongs in an onchange-method of a block.
  * It changes the input/output-checks depending on the connected blocks.
  * This is triggered when connecting to other blocks or when creating/rebuilding.
- * @param  {BlockSvg}   block               Blockly.BlockSvg
- * @param  {Events}     event               Blockly.Events
+ * @this   {BlockSvg}                       Blockly.BlockSvg
  * @param  {Boolean}    [in2out=true]       Should the inputs-checks be transferred to the output
  * @param  {Boolean}    [out2in=true]       Should the output-checks be transferred to the inputs
  * @param  {?string[]}  [selectInputs=null] names of inputs which to take into account
  *                                          If null then all inputs are considered
  */
-Blockly.Constants.checksPassThrough = function(block, event, in2out = true, out2in = true, selectInputs = null) {
-  let blockCreate = event.type == 'create' && ( event.blockId == block.id ||
-                                                event.ids.includes(block.id) );
-  let blockPlugged = event.type == 'move' && ( event.blockId == block.id &&
-                                        event.newParentId != event.oldParentId);
-  let blockConnect = event.type == 'move' && ( event.newParentId == block.id ||
-                                               event.oldParentId == block.id );
+Blockly.Constants.checksPassThrough = function( in2out = true,
+                                                out2in = true,
+                                                selectInputs = null) {
+  return function(event) {
+    let blockCreate = event.type == 'create' && ( event.blockId == this.id ||
+                                                  event.ids.includes(this.id) );
+    let blockPlugged = event.type == 'move' && ( event.blockId == this.id &&
+                                          event.newParentId != event.oldParentId);
+    let blockConnect = event.type == 'move' && ( event.newParentId == this.id ||
+                                                 event.oldParentId == this.id );
 
-  if (blockCreate || blockPlugged || blockConnect) {
+    if (blockCreate || blockPlugged || blockConnect) {
 
-    let checks = new function() {
-      this.inputs = null;
-      this.output = block.outputConnection.targetConnection
-                          && block.outputConnection.targetConnection.check_;
-      this.out2in = () => { this.inputs = this.output };
-      this.in2out = () => { this.output = this.inputs };
-      this.addInput = function(check) {
-        if (check) {
-          if (!this.inputs) {
-            this.inputs = check;
-          } else {
-            this.inputs = this.inputs.filter(n => check.includes(n));
+      let checks = new (function(block) {
+        this.inputs = null;
+        this.output = block.outputConnection.targetConnection
+                            && block.outputConnection.targetConnection.check_;
+        this.out2in = () => { this.inputs = this.output };
+        this.in2out = () => { this.output = this.inputs };
+        this.addInput = function(check) {
+          if (check) {
+            if (!this.inputs) {
+              this.inputs = check;
+            } else {
+              this.inputs = this.inputs.filter(n => check.includes(n));
+            }
           }
-        }
-      };
-      this.getInputs = function() {
-        for (let input of block.inputList) {
-          if (selectInputs && !selectInputs.includes(input.name)) continue;
-          let connectBlock = input.connection.targetBlock();
-          if (event.oldInputName != input.name && connectBlock) {
-            let connectBlockCheck = connectBlock.outputConnection.check_;
-             checks.addInput(connectBlockCheck);
+        };
+        this.getInputs = function() {
+          for (let input of block.inputList) {
+            if (selectInputs && !selectInputs.includes(input.name)) continue;
+            let connectBlock = input.connection.targetBlock();
+            if (event.oldInputName != input.name && connectBlock) {
+              let connectBlockCheck = connectBlock.outputConnection.check_;
+               checks.addInput(connectBlockCheck);
+            }
           }
-        }
-      };
+        };
+      })(this);
+
+      if (out2in && !in2out) checks.out2in();
+      else checks.getInputs();
+
+      if (out2in) checks.addInput(checks.output);
+      if (in2out) checks.in2out();
+
+      // set checks in all inputs
+      for (let input of this.inputList) {
+        if (selectInputs && !selectInputs.includes(input.name)) continue;
+        input.setCheck(checks.inputs);
+      }
+      // set output check
+      this.setOutput(true, checks.output);
     }
-
-    if (out2in && !in2out) checks.out2in();
-    else checks.getInputs();
-
-    if (out2in) checks.addInput(checks.output);
-    if (in2out) checks.in2out();
-
-    // set checks in all inputs
-    for (let input of block.inputList) {
-      if (selectInputs && !selectInputs.includes(input.name)) continue;
-      input.setCheck(checks.inputs);
-    }
-    // set output check
-    block.setOutput(true, checks.output);
   }
 }
