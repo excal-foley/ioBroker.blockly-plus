@@ -5,10 +5,10 @@ goog.provide('Blockly.JavaScript.Other');
 goog.require('Blockly.JavaScript');
 
 // --- logic_ifEmpty --------------------------------------------------
-Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty']                    = {'en': 'if empty',      'de': 'falls leer'  };
-Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_then']               = {'en': 'then',          'de': 'dann'        };
-Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_tooltip']            = {'en': '',              'de': ''            };
-Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_helpurl']            = {'en': '',              'de': ''            };
+Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty']                    = {'en': 'if empty/false', 'de': 'falls leer/falsch'  };
+Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_then']               = {'en': 'then',           'de': 'dann'        };
+Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_tooltip']            = {'en': '',               'de': ''            };
+Blockly.Words['BLOCKLY-PLUS_logic_ifEmpty_helpurl']            = {'en': '',               'de': ''            };
 
 Blockly.Other.blocks['BLOCKLY-PLUS_logic_ifEmpty'] =
     '  <block type="BLOCKLY-PLUS_logic_ifEmpty">'
@@ -33,7 +33,8 @@ Blockly.Blocks['BLOCKLY-PLUS_logic_ifEmpty'] = {
     Blockly.BlocklyPlus.Marker(this);
   },
 
-  onchange: function(event) { Blockly.Constants.checksPassThrough(this, event) }
+  // changes the input/output-checks depending on the connected blocks
+  onchange: Blockly.Constants.checksPassThrough()
 }
 
 Blockly.JavaScript['BLOCKLY-PLUS_logic_ifEmpty'] = function(block) {
