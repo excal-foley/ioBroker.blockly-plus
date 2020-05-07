@@ -161,7 +161,7 @@ Blockly.JavaScript['BLOCKLY-PLUS_controls_set_flow_label'] = function(block) {
 }
 
 // --- flow_label_statements -----------------------------------------------------------
-Blockly.Words['BLOCKLY-PLUS_controls_flow_label_statements_break']         = {'en': 'Cancel',               'de': 'Abbrechen von'            };
+Blockly.Words['BLOCKLY-PLUS_controls_flow_label_statements_break']         = {'en': 'Cancel',               'de': 'Beenden von'            };
 Blockly.Words['BLOCKLY-PLUS_controls_flow_label_statements_continue']      = {'en': 'Next execution of',    'de': 'Nächste Ausführung von'            };
 Blockly.Words['BLOCKLY-PLUS_controls_flow_label_statements_deflt']         = Blockly.Words['BLOCKLY-PLUS_controls_set_flow_label_deflt'];
 Blockly.Words['BLOCKLY-PLUS_controls_flow_label_statements_warn']          = {'en': 'This block may only be used within a loop with name!',     'de': 'Dieser Block darf nur innerhalb einer Schleife mit Namen verwendet werden!'      };
