@@ -1,73 +1,102 @@
 'use strict';
-() => {
 
-Blockly.Msg["LISTS_CREATE_WITH_INPUT_WITH"] = "Liste";
-Blockly.Msg["PROCEDURES_DEFNORETURN_TITLE"] = "Funktion";
-Blockly.Msg["PROCEDURES_DEFRETURN_TITLE"] = Blockly.Msg["PROCEDURES_DEFNORETURN_TITLE"];
-Blockly.Msg["TEXT_JOIN_TITLE_CREATEWITH"] = "Text";
-Blockly.Msg["TEXT_INDEXOF_OPERATOR_FIRST"] = "suche erstes Auftreten von";
-Blockly.Msg["TEXT_INDEXOF_OPERATOR_LAST"] = "suche letztes Auftreten von";
-Blockly.Msg["LISTS_CREATE_EMPTY_TITLE"] = "leere Liste";
-Blockly.Msg["LISTS_CREATE_WITH_INPUT_WITH"] = "Liste";
-Blockly.Msg["LISTS_INLIST"] = "in Liste";
-Blockly.Msg["LISTS_GET_INDEX_INPUT_IN_LIST"] = Blockly.Msg["LISTS_INLIST"];
-Blockly.Msg["LISTS_GET_SUBLIST_INPUT_IN_LIST"] = Blockly.Msg["LISTS_INLIST"];
-Blockly.Msg["LISTS_INDEX_OF_INPUT_IN_LIST"] = Blockly.Msg["LISTS_INLIST"];
-Blockly.Msg["LISTS_SET_INDEX_INPUT_IN_LIST"] = Blockly.Msg["LISTS_INLIST"];
+Blockly.Words['BLOCKLY-PLUS_shortcut_words']               = {'en': 'Shortcut Words',                     'de': 'Kurze Wörter'      };
+Blockly.Words['BLOCKLY-PLUS_shortcut_words_tooltip']       = {'en': '',                     'de': ''            };
+Blockly.Words['BLOCKLY-PLUS_shortcut_words_helpurl']       = {'en': '',                     'de': ''            };
 
-Blockly.Msg["LOGIC_TERNARY_CONDITION"] = "falls";
-Blockly.Msg["LOGIC_TERNARY_IF_TRUE"] = "dann";
-Blockly.Msg["LOGIC_TERNARY_IF_FALSE"] = "sonst";
-Blockly.Msg["LOGIC_NEGATE_TITLE"] = "! %1";
+Blockly.Other.blocks['BLOCKLY-PLUS_shortcut_words'] =
+    '  <block type="BLOCKLY-PLUS_shortcut_words"></block>';
 
-Blockly.Msg["VARIABLES_SET"] = "%1 := %2";
-Blockly.Msg["MATH_CHANGE_TITLE"] = "%1 += %2";
+Blockly.JavaScript['BLOCKLY-PLUS_shortcut_words'] = (block) => '';
 
-Blockly.Msg["CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK"] = "Beende Schleife";
-Blockly.Msg["CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE"] = "nächte Ausführung von Schleife";
+Blockly.Blocks['BLOCKLY-PLUS_shortcut_words'] = {
+  init: function() {
+
+    this.appendDummyInput()
+        .appendField(Blockly.Words['BLOCKLY-PLUS_shortcut_words'][systemLang]);
+
+    if (!this.workspace.options.maxInstances) this.workspace.options.maxInstances = [];
+    this.workspace.options.maxInstances[this.type] = 1;
+
+    //this.setNextStatement(true, null);
+    this.setColour(Blockly.Constants.Logic.HUE);
+    this.setTooltip(Blockly.Words['BLOCKLY-PLUS_shortcut_words_tooltip'][systemLang]);
+    this.setHelpUrl(Blockly.Words['BLOCKLY-PLUS_shortcut_words_helpurl'][systemLang]);
+    Blockly.BlocklyPlus.Marker(this);
 
 
-//Blockly.Words['Logic'] = {'en': 'Logic3', 'de': 'Logik3'};
-//Blockly.Words['Math'] = {'en': 'Math3', 'de': 'Mathe3'};
-//Blockly.Words['Text'] = {'en': 'Text2', 'de': 'Text2'};
-//Blockly.Words['System'] = {'en': 'System2', 'de': 'System2'};
-Blockly.Words['Custom'] = {'en': 'Custom', 'de': 'Eigene'};
+    if (this.isInFlyout || this.isInMutator || this.isInsertionMarker_) return;
+
+    console.debug('Words change to shortcut');
+
+    let replaceMsg = function(msgName, obj) {
+      if (obj[systemLang] && Blockly.Msg[msgName]) Blockly.Msg[msgName] = obj[systemLang];
+    }
+
+    let replaceWord = function(wordName, obj) {
+      if (Blockly.Words[wordName]) Object.assign(Blockly.Words[wordName], obj);
+    }
 
 
+    replaceMsg( 'PROCEDURES_DEFNORETURN_TITLE',                  { 'de': 'Funktion' });
+    replaceMsg( 'PROCEDURES_DEFRETURN_TITLE',                    { 'de': Blockly.Msg['PROCEDURES_DEFNORETURN_TITLE'] });
+    replaceMsg( 'TEXT_JOIN_TITLE_CREATEWITH',                    { 'de': 'Text' });
+    replaceMsg( 'TEXT_INDEXOF_OPERATOR_FIRST',                   { 'de': 'suche erstes Auftreten von' });
+    replaceMsg( 'TEXT_INDEXOF_OPERATOR_LAST',                    { 'de': 'suche letztes Auftreten von' });
+    replaceMsg( 'LISTS_CREATE_EMPTY_TITLE',                      { 'de': 'leere Liste' });
+    replaceMsg( 'LISTS_CREATE_WITH_INPUT_WITH',                  { 'de': 'Liste' });
+    replaceMsg( 'LISTS_INLIST',                                  { 'de': 'in Liste' });
+    replaceMsg( 'LISTS_GET_INDEX_INPUT_IN_LIST',                 { 'de': Blockly.Msg['LISTS_INLIST'] });
+    replaceMsg( 'LISTS_GET_SUBLIST_INPUT_IN_LIST',               { 'de': Blockly.Msg['LISTS_INLIST'] });
+    replaceMsg( 'LISTS_INDEX_OF_INPUT_IN_LIST',                  { 'de': Blockly.Msg['LISTS_INLIST'] });
+    replaceMsg( 'LISTS_SET_INDEX_INPUT_IN_LIST',                 { 'de': Blockly.Msg['LISTS_INLIST'] });
 
-//Ändert Deutsches Timeformat von 'SS' auf 'hh'
-Blockly.Words['time_get_default_format'].de            = 'JJJJ.MM.TT hh:mm:ss.sss';
-Blockly.Words['time_get_hh_mm'].de                     = 'hh:mm';
-Blockly.Words['time_get_hh_mm_ss'].de                  = 'hh:mm:ss';
-Blockly.Words['time_get_hh_mm_ss.sss'].de              = 'hh:mm:ss.sss';
-Blockly.Words['time_astro_default_format'].de          = 'JJJJ.MM.TT hh:mm:ss.sss';
-Blockly.Words['time_get_custom'].de                    = 'Benutzerdefiniert';
+    replaceMsg( 'LOGIC_TERNARY_CONDITION',                       { 'de': 'falls' });
+    replaceMsg( 'LOGIC_TERNARY_IF_TRUE',                         { 'de': 'dann' });
+    replaceMsg( 'LOGIC_TERNARY_IF_FALSE',                        { 'de': 'sonst' });
+    replaceMsg( 'LOGIC_NEGATE_TITLE',                            { 'de': '! %1' });
 
-Blockly.Words['timeouts_settimeout'].de                = 'Verzögere';
-//Blockly.Words['timeouts_settimeout_name'].de           = 'Verzögerung';
-Blockly.Words['timeouts_settimeout_in'].de             = 'um';
-//Blockly.Words['timeouts_settimeout_tooltip'].de        = 'Ausführung verzögern';
+    replaceMsg( 'VARIABLES_SET',                                 { 'de': '%1 := %2' });
+    replaceMsg( 'MATH_CHANGE_TITLE',                             { 'de': '%1 += %2' });
 
-Blockly.Words['timeouts_cleartimeout'].de              = 'stop Verzögerung';
-//Blockly.Words['timeouts_cleartimeout_tooltip'].de      = 'Ausführungsverzögerung anhalten';
+    replaceMsg( 'CONTROLS_FLOW_STATEMENTS_OPERATOR_BREAK',       { 'de': 'Beenden von Schleife' });
+    replaceMsg( 'CONTROLS_FLOW_STATEMENTS_OPERATOR_CONTINUE',    { 'de': 'Nächste Ausführung von Schleife' });
 
-Blockly.Words['timeouts_setinterval'].de               = 'Wiederhole';
-//Blockly.Words['timeouts_setinterval_name'].de          = 'Intervall';
-//Blockly.Words['timeouts_setinterval_in'].de            = 'alle';
-//Blockly.Words['timeouts_setinterval_tooltip'].de       = 'Zyklische Ausführung';
 
-Blockly.Words['timeouts_clearinterval'].de             = 'stop Wiederholung';
-//Blockly.Words['timeouts_clearinterval_tooltip'].de     = 'Ausführungsintervall anhalten';
+    //Ändert Deutsches Timeformat von 'SS' auf 'hh'
+    replaceWord( 'time_get_default_format',            { 'de': 'JJJJ.MM.TT hh:mm:ss.sss' });
+    replaceWord( 'time_get_hh_mm',                     { 'de': 'hh:mm' });
+    replaceWord( 'time_get_hh_mm_ss',                  { 'de': 'hh:mm:ss' });
+    replaceWord( 'time_get_hh_mm_ss.sss',              { 'de': 'hh:mm:ss.sss' });
+    replaceWord( 'time_astro_default_format',          { 'de': 'JJJJ.MM.TT hh:mm:ss.sss' });
+    replaceWord( 'time_get_custom',                    { 'de': 'Benutzerdefiniert' });
 
-Blockly.Words['get_value_OID'].de = 'von';
+    replaceWord( 'timeouts_settimeout',                { 'de': 'Verzögere' });
+    //replaceWord( 'timeouts_settimeout_name',           { 'de': 'Verzögerung' });
+    replaceWord( 'timeouts_settimeout_in',             { 'de': 'um' });
+    //replaceWord( 'timeouts_settimeout_tooltip',        { 'de': 'Ausführung verzögern' });
 
-Blockly.Words['convert_tonumber'].de = 'nach Zahl';
-Blockly.Words['convert_toboolean'].de = 'zu Logik';
-Blockly.Words['convert_tostring'].de = 'zu Text';
-Blockly.Words['convert_type'].de = 'Typ von';
-Blockly.Words['convert_to_date'].de = 'zu Datum/Zeit';
-Blockly.Words['convert_to'].de = 'zu';
-Blockly.Words['convert_json2object'].de = 'JSON zu Objekt';
-Blockly.Words['convert_object2json'].de = 'Objekt zu JSON';
+    replaceWord( 'timeouts_cleartimeout',              { 'de': 'stop Verzögerung' });
+    //replaceWord( 'timeouts_cleartimeout_tooltip',      { 'de': 'Ausführungsverzögerung anhalten' });
 
+    replaceWord( 'timeouts_setinterval',               { 'de': 'Wiederhole' });
+    //replaceWord( 'timeouts_setinterval_name',          { 'de': 'Intervall' });
+    //replaceWord( 'timeouts_setinterval_in',            { 'de': 'alle' });
+    //replaceWord( 'timeouts_setinterval_tooltip',       { 'de': 'Zyklische Ausführung' });
+
+    replaceWord( 'timeouts_clearinterval',             { 'de': 'stop Wiederholung' });
+    //replaceWord( 'timeouts_clearinterval_tooltip',     { 'de': 'Ausführungsintervall anhalten' });
+
+    replaceWord( 'get_value_OID',                      { 'de': 'von' });
+
+    replaceWord( 'convert_tonumber',                   { 'de': 'nach Zahl' });
+    replaceWord( 'convert_toboolean',                  { 'de': 'zu Logik' });
+    replaceWord( 'convert_tostring',                   { 'de': 'zu Text' });
+    replaceWord( 'convert_type',                       { 'de': 'Typ von' });
+    replaceWord( 'convert_to_date',                    { 'de': 'zu Datum/Zeit' });
+    replaceWord( 'convert_to',                         { 'de': 'zu' });
+    replaceWord( 'convert_json2object',                { 'de': 'JSON zu Objekt' });
+    replaceWord( 'convert_object2json',                { 'de': 'Objekt zu JSON' });
+
+  }
 }
