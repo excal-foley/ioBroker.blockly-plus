@@ -32,7 +32,8 @@
     "singleton": true,
     "noConfig": true,
     "type": "logic",
-    "dependencies": [ {"js-controller": ">=1.4.2"} ]
+    "dependencies": [ {"js-controller": ">=1.4.2"} ],
+    "globalDependencies": [ {"javascript": ">=4.5.1"} ]
   },
   "native": {},
   "objects": []
