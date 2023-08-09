@@ -87,6 +87,8 @@ Blockly.BlocklyPlus = {
  * @param  {?string[]}  [selectInputs=null] names of inputs which to take into account
  *                                          If null then all inputs are considered
  */
+Blockly.Constants = Blockly.Constants || {};
+Blockly.Constants.Loops = Blockly.Constants.Loops || {};
 Blockly.Constants.checksPassThrough = function( in2out = true,
                                                 out2in = true,
                                                 selectInputs = null) {

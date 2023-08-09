@@ -365,7 +365,7 @@ Blockly.Multiplex.set_element_function = function(fields, itemGroup, operatorId)
         if (n > -1) input.appendField(selector, 'OPERATOR' + n);
         let value = field.value || operatorId;
         if (value) selector.setValue(value);
-        selector.callValidator();
+        selector.callValidator && selector.callValidator();
 
         input.codeMap.push(['FIELD_OPERATOR', 'OPERATOR' + n]);
 

@@ -213,7 +213,7 @@ Blockly.JavaScript['BLOCKLY-PLUS_controls_flow_label_statements'] = function(blo
 
  /**
   * This mixin adds a check to make sure the block contained a loop.
-  * Otherwise disable and add warning to the block.
+  * Otherwise, disable and add warning to the block.
   * @mixin
   * @augments Blockly.Block
   * @package
@@ -261,7 +261,7 @@ Blockly.Constants.Loops.CONTROL_SET_FLOW_LABEL_MIXIN = {
 
   /**
    * Called whenever anything on the workspace changes.
-   * Disconnect all blocks, which not included in LOOP_TYPES.
+   * Disconnect all blocks, which are not included in LOOP_TYPES.
    * Disconnect all blocks after first statementBlock.
    * Disable block if no LOOP_TYPES block is connected.
    * @param {!Blockly.Events.Abstract} event Change event.
@@ -303,7 +303,7 @@ Blockly.Constants.Loops.CONTROL_SET_FLOW_LABEL_MIXIN = {
 
 /**
  * This mixin adds a check to make sure the 'controls_flow_statements' block
- * is contained in a loop. Otherwise a warning is added to the block.
+ * is contained in a loop. Otherwise, a warning is added to the block.
  * The block must have FieldDropdown named 'SELECTOR'
  * or FieldTextInput named 'VAR_NAME'
  * @mixin
@@ -315,7 +315,7 @@ Blockly.Constants.Loops.CONTROL_FLOW_LOOP_MIXIN = {
   /**
    * Called whenever anything on the workspace changes.
    * Add warning and disable if this flow block is not nested inside a loop.
-   * If block has selector, update selected option.
+   * If block has selector, update a selected option.
    * If block has no selector, set textField text.
    * @param {!Blockly.Events.Abstract} event Change event.
    * @this {Blockly.Block}
@@ -409,7 +409,7 @@ Blockly.Constants.Loops.CONTROL_FLOW_LOOP_MIXIN = {
   },
 
   /**
-   * Get all surround loops which included in LOOP_TYPES.
+   * Get all surround loops that included in LOOP_TYPES.
    * @return {Blockly.Block[]}  Array of surroundLoops
    * @this {Blockly.Block}
    */
@@ -423,8 +423,8 @@ Blockly.Constants.Loops.CONTROL_FLOW_LOOP_MIXIN = {
 
   /**
    * Get variable from surround loop.
-   * If block has selector, get surroundLoop by select option.
-   * If block has no selector, get next surroundLoop.
+   * If a block has a selector, get surroundLoop by select option.
+   * If the block has no selector, get the next surroundLoop.
    * @param  {Regex}         varRegex The pattern to detect the value.
    * @return {String}                 value from parent
    */

@@ -17,8 +17,17 @@
       "en": "Add future blocks to ioBroker JavaScript-Blockly",
       "de": "Fügt neu Blöcke zu ioBroker JavaScript-Blockly"
     },
-    "authors": ["Excal Foley <excal.foley@gmail.com>"],
-    "keywords": ["ioBroker", "blockly", "javascript", "js", "scriptengine", "blokly"],
+    "authors": [
+      "Excal Foley <excal.foley@gmail.com>"
+    ],
+    "keywords": [
+      "ioBroker",
+      "blockly",
+      "javascript",
+      "js",
+      "scriptengine",
+      "blokly"
+    ],
     "platform": "Javascript/Node.js",
     "mode": "once",
     "icon": "blockly-plus.png",
@@ -31,9 +40,22 @@
     "enabled": true,
     "singleton": true,
     "noConfig": true,
+    "connectionType": "none",
+    "dataSource": "none",
+    "adminUI": {
+      "config": "none"
+    },
     "type": "logic",
-    "dependencies": [ {"js-controller": ">=1.4.2"} ],
-    "globalDependencies": [ {"javascript": ">=4.5.1"} ]
+    "dependencies": [
+      {
+        "js-controller": ">=1.4.2"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "javascript": ">=4.5.1"
+      }
+    ]
   },
   "native": {},
   "objects": []
