@@ -76,7 +76,7 @@ You can view and test the blocks in **sandbox.html**
 <!--
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.1.0 (2023-08-09)
 * (bluefox) refactoring
 
 ## License

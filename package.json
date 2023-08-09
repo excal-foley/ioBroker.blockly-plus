@@ -1,6 +1,6 @@
 {
   "name": "iobroker.blockly-plus",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "ioBroker blockly-plus Adapter",
   "author": {
     "name": "Excal Foley",
@@ -20,7 +20,14 @@
       "url": "https://github.com/excal-foley/ioBroker.blockly-plus/blob/master/LICENSE"
     }
   ],
-  "keywords": ["ioBroker", "blockly", "javascript", "js", "scriptengine", "blokly"],
+  "keywords": [
+    "ioBroker",
+    "blockly",
+    "javascript",
+    "js",
+    "scriptengine",
+    "blokly"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/excal-foley/ioBroker.blockly-plus"

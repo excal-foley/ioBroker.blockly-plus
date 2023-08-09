@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "blockly-plus",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "news": {
+      "0.1.0": {
+        "en": "refactoring",
+        "de": "refactoring",
+        "ru": "рефакторинг",
+        "pt": "refactoring",
+        "nl": "refactor",
+        "fr": "refactoring",
+        "it": "refactoring",
+        "es": "refactoring",
+        "pl": "refaktor",
+        "uk": "рефакторинг",
+        "zh-cn": "重新计算"
+      },
       "0.0.1": {
         "en": "initial adapter",
         "de": "Initiale Version"
