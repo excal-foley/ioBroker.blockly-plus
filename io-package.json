@@ -46,7 +46,6 @@
     "icon": "blockly-plus.png",
     "extIcon": "https://raw.githubusercontent.com/excal-foley/ioBroker.blockly-plus/master/admin/blockly-plus.png",
     "readme": "https://github.com/excal-foley/ioBroker.blockly-plus/blob/master/README.md",
-    "localLink": "%web_protocol%://%ip%:8081/adapter/javascript/tab.html",
     "loglevel": "info",
     "blockly": true,
     "onlyWWW": true,
