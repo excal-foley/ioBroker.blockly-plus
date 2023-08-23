@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "blockly-plus",
-    "version": "0.0.1",
+    "version": "0.1.0",
     "news": {
+      "0.1.0": {
+        "en": "refactoring",
+        "de": "refactoring",
+        "ru": "рефакторинг",
+        "pt": "refactoring",
+        "nl": "refactor",
+        "fr": "refactoring",
+        "it": "refactoring",
+        "es": "refactoring",
+        "pl": "refaktor",
+        "uk": "рефакторинг",
+        "zh-cn": "重新计算"
+      },
       "0.0.1": {
         "en": "initial adapter",
         "de": "Initiale Version"
@@ -17,23 +30,44 @@
       "en": "Add future blocks to ioBroker JavaScript-Blockly",
       "de": "Fügt neu Blöcke zu ioBroker JavaScript-Blockly"
     },
-    "authors": ["Excal Foley <excal.foley@gmail.com>"],
-    "keywords": ["ioBroker", "blockly", "javascript", "js", "scriptengine", "blokly"],
+    "authors": [
+      "Excal Foley <excal.foley@gmail.com>"
+    ],
+    "keywords": [
+      "ioBroker",
+      "blockly",
+      "javascript",
+      "js",
+      "scriptengine",
+      "blokly"
+    ],
     "platform": "Javascript/Node.js",
     "mode": "once",
     "icon": "blockly-plus.png",
     "extIcon": "https://raw.githubusercontent.com/excal-foley/ioBroker.blockly-plus/master/admin/blockly-plus.png",
     "readme": "https://github.com/excal-foley/ioBroker.blockly-plus/blob/master/README.md",
-    "localLink": "%web_protocol%://%ip%:8081/adapter/javascript/tab.html",
     "loglevel": "info",
     "blockly": true,
     "onlyWWW": true,
     "enabled": true,
     "singleton": true,
     "noConfig": true,
+    "connectionType": "none",
+    "dataSource": "none",
+    "adminUI": {
+      "config": "none"
+    },
     "type": "logic",
-    "dependencies": [ {"js-controller": ">=1.4.2"} ],
-    "globalDependencies": [ {"javascript": ">=4.5.1"} ]
+    "dependencies": [
+      {
+        "js-controller": ">=1.4.2"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "javascript": ">=4.5.1"
+      }
+    ]
   },
   "native": {},
   "objects": []

@@ -1,6 +1,6 @@
 {
   "name": "iobroker.blockly-plus",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "ioBroker blockly-plus Adapter",
   "author": {
     "name": "Excal Foley",
@@ -20,19 +20,41 @@
       "url": "https://github.com/excal-foley/ioBroker.blockly-plus/blob/master/LICENSE"
     }
   ],
-  "keywords": ["ioBroker", "blockly", "javascript", "js", "scriptengine", "blokly"],
+  "keywords": [
+    "ioBroker",
+    "blockly",
+    "javascript",
+    "js",
+    "scriptengine",
+    "blokly"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/excal-foley/ioBroker.blockly-plus"
   },
+  "files": [
+    "admin/",
+    "!admin/sandbox/",
+    "images/",
+    "LICENSE",
+    "io-package.json"
+  ],
   "dependencies": {},
   "devDependencies": {
-    "gulp": "^3.9.1",
-    "mocha": "^4.1.0",
-    "chai": "^4.1.2"
+    "@alcalzone/release-script": "^3.6.0",
+    "@alcalzone/release-script-plugin-iobroker": "^3.6.0",
+    "@alcalzone/release-script-plugin-license": "^3.5.9",
+    "gulp": "^4.0.2",
+    "mocha": "^10.2.0",
+    "chai": "^4.3.7"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha --exit"
+    "test": "node node_modules/mocha/bin/mocha --exit",
+    "release": "release-script",
+    "release-patch": "release-script patch --yes",
+    "release-minor": "release-script minor --yes",
+    "release-major": "release-script major --yes",
+    "update-packages": "ncu --upgrade"
   },
   "bugs": {
     "url": "https://github.com/excal-foley/ioBroker.blockly-plus/issues"
